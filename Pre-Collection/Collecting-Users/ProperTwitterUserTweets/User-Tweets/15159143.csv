@@ -1,0 +1,16 @@
+full_text,tweet_id,screen_name,user_ID
+lol every time i see a presentation on k8s based infrastructure i'm amazed at all the time wasted solving problems which have already been solved.  the fact people do this to themselves on a cloud provider is just mind boggling.,1514645225834045442,nomadlogicLA,15159143
+"2pm - woo open calendar, no more calls today
+3:34pm - (hanging up on 4th call in a row) man karma's a bitch",1514374031633383426,nomadlogicLA,15159143
+coming back to work after a vacation and just watching my co-workers interact 😅 https://t.co/4CSRKW0zUD,1513565604371853316,nomadlogicLA,15159143
+"ok #freebsd peeps - interesting error when trying to run gqrx (gnuradio).  rtl_test and dump1090 work like a charm, this looks like a compilation issue?  pulled in from pkg repo on 14-current 🤔 https://t.co/bstTnMrV88",1513215244306321408,nomadlogicLA,15159143
+"i'm not sure when it was added but thank-you to whomever added the ""-b"" flag to @freebsd poudriere.  looks like i don't have to build openjdk and llvm for this single pkg after all!",1511848820522377220,nomadlogicLA,15159143
+"10yo went to @amoebamusic (he loves records!).  he managed to snag me a copy of an Aphex Twin record 😲
+
+but big shout-out to the worker who helped him find some Run-DMC - he's so stoked on them it made his day!",1511829898670723073,nomadlogicLA,15159143
+"a long time ago we used to clone harddrives when deploying IRIX workstations.  it had a base image with needed compilers, libraries and configs. it sucked and wasn't scalable support wise.
+
+i just looked at how docker is usually managed and i'm confident no lessons were learnt.",1511813503773908992,nomadlogicLA,15159143
+If you loved “move fast and break things” wait until you hear about “move randomly and ignore tech debt”,1511398368219521030,nomadlogicLA,15159143
+"my favorite thing about ""agile"" and ""devops"" is that its unfashionable to have standard versions of databases, OS's and language runtimes.  it's so agile having each team reinvent the wheel!!  OPS is no longer an anchor! well until you shit tips over then its our fault.",1511394765090148357,nomadlogicLA,15159143
+"it's funny how many times i see people complain about freebsd being incompatible, or doing things differently than on linux - only to find out freebsd did the initial implementation of thing, and linux did it differently later and didn't bake any compatibility in.",1511090876218552320,nomadlogicLA,15159143
