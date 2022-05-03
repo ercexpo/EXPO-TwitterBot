@@ -1,0 +1,29 @@
+# "Database":
+## a file, e.g. csv with: user_id, treatment_group
+## during the experiment: add last_replied column
+## needs to be updated continuously
+
+# Code modules:
+
+# 1. get-user-tweets
+## Functionality: for user in users: get last x tweets
+## Status: Written by Hadi
+
+# 2. match-tweet
+## Functionality: if keyword_match == True & last_replied < time_diff: call generate-response-function
+## Bernhard will write
+
+# 3. generate-response
+## Functionality: will generate a reply to tweet
+## Status: will be supplied by Anshuman
+
+# 4. post-response
+## Functionality: posts reply to tweet
+
+# 5. report-activity
+## Functionality: in txt file, every time bot responds, write: user_id, tweet_id (original tweet), tweet_text, timestamp, reply
+
+
+
+
+
