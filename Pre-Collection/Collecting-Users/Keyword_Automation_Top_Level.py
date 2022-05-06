@@ -6,7 +6,7 @@ from tqdm.auto import tqdm
 import os
 import json
 
-DATE = "2022-05-02"
+DATE = "2022-05-05"
 
 def get_tweet_responses(consumer_key, consumer_secret, access_token, access_token_secret, search_words, num_tweets, date):
     auth = tw.OAuthHandler(consumer_key, consumer_secret)
@@ -31,7 +31,8 @@ def get_tweet_responses(consumer_key, consumer_secret, access_token, access_toke
         tweets.append(dict(
             full_text = tweet.full_text,
             tweet_id=tweet.id_str,
-            screen_name=tweet.user.screen_name
+            screen_name=tweet.user.screen_name,
+            user_id=tweet.user.id_str
         ))
 
     return tweets
@@ -46,7 +47,7 @@ def getTweets(token_dict, keywords):
             token_dict['access_token_secret'],
             keyword, num_tweets=20000, date=DATE
         )
-        pd.DataFrame(tweets).to_csv('keyword-results-top/%s.csv' % (keyword), index=False)
+        pd.DataFrame(tweets).to_csv('keyword-results-top-1/%s.csv' % (keyword), index=False)
 
 def getTokens():
     token_arr = []

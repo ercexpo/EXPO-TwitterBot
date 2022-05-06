@@ -1,0 +1,4 @@
+transformers
+numpy
+torch
+alt-profanity-check
