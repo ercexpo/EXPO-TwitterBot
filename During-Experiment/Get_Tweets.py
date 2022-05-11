@@ -15,6 +15,10 @@ def get_tweet_responses(consumer_key, consumer_secret, access_token, access_toke
     auth.set_access_token(access_token, access_token_secret)
     api = tw.API(auth, wait_on_rate_limit=True)
 
+    #add sinceid here
+    #open database, get sinceid as the max of the previous collected TwitterIDs and add as a parameter
+    
+
     tweet = tw.Cursor(api.user_timeline,
             user_id=user, count=10,
             exclude_replies=True, include_rts=False,
