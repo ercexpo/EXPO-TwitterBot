@@ -5,11 +5,12 @@ from threading import Thread
 from tqdm.auto import tqdm
 import os
 import json
+import sqlite3
 
 
 # DATE = "2022-05-05"
 
-def get_tweet_responses(consumer_key, consumer_secret, access_token, access_token_secret, user, num_tweets, date):
+def get_tweet_responses(consumer_key, consumer_secret, access_token, access_token_secret, user, num_tweets, since):
 
     auth = tw.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
@@ -21,6 +22,7 @@ def get_tweet_responses(consumer_key, consumer_secret, access_token, access_toke
 
     tweet = tw.Cursor(api.user_timeline,
             user_id=user, count=10,
+            since_id=since,
             exclude_replies=True, include_rts=False,
             tweet_mode='extended').items(num_tweets)
 
@@ -34,23 +36,50 @@ def get_tweet_responses(consumer_key, consumer_secret, access_token, access_toke
         user_ID=user
     ))
    
-
     return tweets
+
+def getsinceID(user):
+    conn=sqlite3.connect('database.db')
+    c=conn.cursor()
+    c.execute("SELECT sinceid FROM users WHERE userid=(?)",user)
+    result=c.fetch()
+    print("Got Sinceid")
+    conn.commit()
+    conn.close()
+
+    return result
+
+def setsinceID(user, sinceid):
+    conn=sqlite3.connect('database.db')
+    c=conn.cursor()
+    c.execute("UPDATE users SET sinceid = (?) WHERE userid = (?)", sinceid, user)
+    print("Set sinceID")
+    conn.commit()
+    conn.close()
+
+
 
 def getTweets(token_dict, userid, DATE):
     print(token_dict)
     for user in tqdm(userid):
+
+        since1=getsinceID(user)
+
         tweets = get_tweet_responses(
             token_dict['consumer_key'],
             token_dict['consumer_secret'],
             token_dict['access_token'],
             token_dict['access_token_secret'],
-            user, num_tweets=10, date=DATE
+            user, num_tweets=10, date=DATE, since=since1
         )
         if len(tweets)==0:
             continue
         else:
-            pd.DataFrame(tweets).to_csv('User-Tweets/%s.csv' % (user), index=False)
+            df=pd.DataFrame(tweets)
+            Tweetliststr=df['tweet_id'].to_list
+            int_list = list(map(int, Tweetliststr))
+            setsinceID(user, max(int_list))
+            df.to_csv('User-Tweets/%s.csv' % (user), index=False)
 
 def getTokens(DATE):
     DATE=DATE

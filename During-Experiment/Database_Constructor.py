@@ -56,7 +56,7 @@ def PopulateTableforTest():
         mytuple=(corrected_names[i], treatment_group[i], last_replied[i], bot_assigned[i], sinceid[i])
 
         sqlite_insert_with_param = """INSERT INTO users
-                          VALUES (?, ?, ?, ?, ?);"""
+                          VALUES (?, ?, ?, ?, ?)"""
 
         c.execute(sqlite_insert_with_param, mytuple)
 
@@ -81,6 +81,7 @@ if __name__ == "__main__":
     #CreateTable()
     #PopulateTableforTest()
     #ViewTable()
+    a=[]
 
 
 
