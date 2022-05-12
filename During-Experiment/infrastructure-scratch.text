@@ -5,9 +5,11 @@
 
 # Code modules:
 
-# 1. get-user-tweets
+# 1. Get_Tweets.py
 ## Functionality: for user in users: get last x tweets
 ## Status: Written by Hadi
+## To do:
+## - time span logic (last_replied < 24h) for whether to trigger Match_Tweet
 
 # 2. match-tweet
 ## Functionality: if keyword_match == True & last_replied < time_diff: call generate-response-function
