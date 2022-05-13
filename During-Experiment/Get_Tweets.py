@@ -59,7 +59,7 @@ def setsinceID(user, sinceid):
 
 
 
-def getTweets(token_dict, userid, DATE):
+def getTweets(token_dict, userid):
     print(token_dict)
     for user in tqdm(userid):
 
@@ -70,7 +70,7 @@ def getTweets(token_dict, userid, DATE):
             token_dict['consumer_secret'],
             token_dict['access_token'],
             token_dict['access_token_secret'],
-            user, num_tweets=10, date=DATE, since=since1
+            user, num_tweets=10, since=since1
         )
         if len(tweets)==0:
             continue
@@ -81,27 +81,22 @@ def getTweets(token_dict, userid, DATE):
             setsinceID(user, max(int_list))
             df.to_csv('User-Tweets/%s.csv' % (user), index=False)
 
-def getTokens(DATE):
-    DATE=DATE
+def getTokens():
     token_arr = []
     with open('tokens') as f:
         tokens = f.read().strip().split('\n')
         for token in tokens:
             consumer_key,consumer_secret,access_token,access_token_secret = token.split('|')
-            try:
-                get_tweet_responses(consumer_key, consumer_secret, access_token, access_token_secret, 44201535, 1, DATE)
-                token_arr.append(dict(consumer_key=consumer_key,consumer_secret=consumer_secret,access_token=access_token,access_token_secret=access_token_secret))
-            except Exception as e:
-                continue
+            token_arr.append(dict(consumer_key=consumer_key,consumer_secret=consumer_secret,access_token=access_token,access_token_secret=access_token_secret))
+
     return (token_arr)
 
 
-def run_collection(DATE1):
-    DATE = DATE1
+def run_collection():
     if os.path.exists('working-tokens.json'):
         tokens = json.load(open('working-tokens.json'))
     else:
-        tokens = getTokens(DATE)
+        tokens = getTokens()
         json.dump(tokens, open('working-tokens.json', 'w'))
 
     with open('UserDatabase.csv') as f:
@@ -117,7 +112,7 @@ def run_collection(DATE1):
         token_dict = tokens[i]
         start = int(i * userid_PER_THREAD)
         thread_userid = userid[start: start + userid_PER_THREAD]
-        thread = Thread(target=getTweets, args=(token_dict, thread_userid,DATE, ))
+        thread = Thread(target=getTweets, args=(token_dict, thread_userid, ))
         thread.start()
         threads.append(thread)
 

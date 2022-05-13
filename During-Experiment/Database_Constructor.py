@@ -11,8 +11,7 @@ def CreateTable():
     c=conn.cursor()
     c.execute("""CREATE TABLE users (
     userid TEXT,
-    Validation TEXT,
-    Bot_Assigned TEXT,
+    Treatment TEXT,
     last_replied TEXT,
     sinceid TEXT
     );
@@ -78,10 +77,11 @@ def ViewTable():
 
 
 if __name__ == "__main__":
-    #CreateTable()
+    CreateTable()
     #PopulateTableforTest()
     #ViewTable()
     a=[]
+  
 
 
 

@@ -21,6 +21,8 @@ def matchKeywords(text):
     # pre-processing
     text = text.lower() # what else? stemming? getting rid of ', like in Oscar's?
 
+    matches =[]
+    
     # get all matches
     matches = [word for word in keywords if (word in text)]
 
