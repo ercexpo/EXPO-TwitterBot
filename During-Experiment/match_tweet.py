@@ -13,16 +13,17 @@ import random
 # input5 = "Travis d'arnaud already got his wedding ring, so he's going after an Oscars Trophy this time"
 # matchKeywords(input1)
 
-keyword_df = pd.read_csv("keywords.csv")
-keywords = list(keyword_df['keyword'])
-
 def matchKeywords(text):
+
+    # get keywords
+    keyword_df = pd.read_csv("Twitter Bot Keywords (Final).csv")
+    keywords = list(keyword_df['keyword'])
 
     # pre-processing
     text = text.lower() # what else? stemming? getting rid of ', like in Oscar's?
 
     matches =[]
-    
+
     # get all matches
     matches = [word for word in keywords if (word in text)]
 
