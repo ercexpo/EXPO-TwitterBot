@@ -13,7 +13,7 @@
 
 # 2. match-tweet
 ## Functionality: if keyword_match == True & last_replied < time_diff: call generate-response-function
-## Bernhard will write
+## done - please review
 
 # 3. generate-response
 ## Functionality: will generate a reply to tweet
