@@ -3,17 +3,39 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 import pandas as pd
 import re
-
-stop_file = open("stopwords.txt", "r")
-try:
-    content = stop_file.read()
-    stop_words = content.split(",")
-finally:
-    stop_file.close()
+import random
 
 
+
+def load_all_files():
+    # Load template responses file
+    response_templates = pd.read_csv('response_templates.csv')['templates'].to_list()
+
+
+    # Load news templates and info
+    news_templates = pd.read_csv('news_templates.csv')['templates'].to_list()
+    sports_df = pd.read_csv('sports.csv')
+    entertainment_df = pd.read_csv('entertainment.csv')
+    lifestyle_df = pd.read_csv('lifestyle.csv')
+
+    return (response_templates, news_templates, sports_df, entertainment_df, lifestyle_df)
+
+
+
+
+# Function to check if response is unsatisfactory
 def is_faulty(original, response):
-    
+
+    # Load stopwords file
+    stop_file = open("stopwords.txt", "r")
+    try:
+        content = stop_file.read()
+        stop_words = content.split(",")
+    finally:
+        stop_file.close()
+
+
+
     # If original tweet and response generated are the same
     if original == response:
       return True
@@ -84,7 +106,7 @@ def load_model():
     return tokenizer, model
 
 
-def run_model(tweets, tokenizer, model):
+def run_model(tweets, tokenizer, model, response_templates):
     #tweets is a list of tweet texts
 
     output = []
@@ -94,7 +116,8 @@ def run_model(tweets, tokenizer, model):
         checker = re.findall(rgx, tweet)
         checker_list = [u[0] for u in checker]
         if checker_list != []:
-            output.append('Template Response TBD')
+            template_choice = random.choice(response_templates)
+            output.append(template_choice)
             continue
 
         cleaned_tweet = clean_tweet(tweet)
@@ -105,8 +128,35 @@ def run_model(tweets, tokenizer, model):
   
         if is_faulty(cleaned_tweet, output[-1]):
             count += 1
-            print(count, output[-1], cleaned_tweet)
-            output[-1] = "Template Response TBD"
+            #print(count, output[-1], cleaned_tweet)
+            template_choice = random.choice(response_templates)
+            output[-1] = template_choice
 
     #output is a list of responses the same length as tweets provided at input
     return output
+
+
+def append_url(topic, response, news_templates, sports_df, entertainment_df, lifestyle_df):
+    if topic == 'Sport':
+        df = sports_df
+    elif topic == 'Entertainment':
+        df = entertainment_df
+    elif topic == 'Lifestyle':
+        df = lifestyle_df
+
+
+    sampled_df = df.sample(1)
+
+    random_template = random.choice(news_templates)
+    random_template = random_template.replace("topic", topic)
+    random_template = random_template.replace("@media", sampled_df['media'].to_list()[0])
+    random_template = random_template.replace("URL", sampled_df["url"].to_list()[0])
+
+    response = response + ' ' + random_template
+
+    return response
+
+
+
+
+

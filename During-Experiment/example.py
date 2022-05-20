@@ -1,4 +1,7 @@
 import response
+import random
+
+response_templates, news_templates, sports_df, entertainment_df, lifestyle_df = response.load_all_files()
 
 tokenizer, model = response.load_model()
 
@@ -11,6 +14,12 @@ tweets = [
 ]
 
 
-generated_responses = response.run_model(tweets, tokenizer, model)
+generated_responses = response.run_model(tweets, tokenizer, model, response_templates)
 
 print(generated_responses)
+
+final_outputs = []
+for gen_resp in generated_responses:
+    topic = random.choice(['sports', 'entertainment', 'lifestyle'])
+    final_outputs.append(response.append_url(topic, gen_resp, news_templates, sports_df, entertainment_df, lifestyle_df))
+print(final_outputs)

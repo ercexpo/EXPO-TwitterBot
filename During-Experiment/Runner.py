@@ -4,7 +4,8 @@ from datetime import datetime, timedelta
 from time import time, sleep
 import json
 from collections import defaultdict
-from response import run_model
+import response
+import random
 from Get_Tweets import run_collection
 from match_tweet import matchKeywords
 import os
@@ -28,7 +29,9 @@ def getPrevioustime(useridname):
 
     return result
 
+response_templates, news_templates, sports_df, entertainment_df, lifestyle_df = response.load_all_files()
 
+tokenizer, model = response.load_model()
 
 while True:
    
@@ -45,6 +48,7 @@ while True:
     userid=[]
     originalTweet=[]
     tweetid=[]
+    timestamp=[]
 
     for user in tqdm(os.listdir("User-Tweets")):
         df=pd.read_csv(user)
@@ -77,20 +81,25 @@ while True:
         
         for tweet, ids in zip(tweettext,tweetids):
             #match Tweet Function
+            interact, topic = matchKeywords(tweet)
 
-            if matchKeywords(tweet) == True:
-                generated_output=run_model(tweet)
+            if interact == True:
+                generated_responses = response.run_model(list(tweet), tokenizer, model, response_templates)
+                generated_output=response.append_url(topic, generated_responses, news_templates, sports_df, entertainment_df, lifestyle_df)
                 post_tweets_dump.append(generated_output)
                 originalTweet.append(tweet)
                 tweetid.append(ids)
                 userid.append(useridname)
+                now = datetime.now()
+                dt_string = now.strftime("%Y/%m/%d %H:%M:%S")
+                timestamp.append(dt_string)
+                
 
             else:
                 continue
         
-    replydict={'UserID': userid, 'TweetID': tweetid, 'Original_Tweet': originalTweet, 'Reply': post_tweets_dump }
+    replydict={'UserID': userid, 'TweetID': tweetid, 'Original_Tweet': originalTweet, 'Reply': post_tweets_dump, 'TimeStamp': timestamp}
     df1=pd.DataFrame.from_dict(replydict)
     df1.to_csv('Tweets_to_be_posted.csv')
-
 
 
