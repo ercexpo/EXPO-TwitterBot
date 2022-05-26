@@ -10,7 +10,7 @@ import spacy
 from spacy_langdetect import LanguageDetector
 from spacy.language import Language
 
-DATE = "2022-04-13"
+DATE = "2022-05-16"
 
 def get_tweet_responses(consumer_key, consumer_secret, access_token, access_token_secret, keyword, num_tweets, date):
     auth = tw.OAuthHandler(consumer_key, consumer_secret)
@@ -58,7 +58,8 @@ def get_tweet_responses(consumer_key, consumer_secret, access_token, access_toke
                 full_text = tweet.full_text,
                 tweet_id=tweet.id_str,
                 screen_name=tweet.user.screen_name,
-                user_ID=keyword
+                user_ID=keyword,
+                followers=tweet.user.followers_count
             ))
     except Exception as e:
         print(e)
