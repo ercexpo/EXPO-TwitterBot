@@ -12,6 +12,7 @@ import os
 from tqdm.auto import tqdm
 import math
 import sqlite3
+from Post_Response import run_posting
 
 def checkTreatment(useridname):
     conn=sqlite3.connect('database.db')
@@ -42,7 +43,7 @@ while True:
     dt_string = now.strftime("%Y-%m-%d")
 	
     #get-user-tweets
-    run_collection(dt_string)
+    run_collection() #
 
     post_tweets_dump=[]
     userid=[]
@@ -56,7 +57,7 @@ while True:
         #if user in treatment group then continue with the rest
         useridname=user.split(".csv")[0]
         
-        if checkTreatment(useridname)== False:
+        if checkTreatment(useridname)== False: #might need to change this to a string
             continue
 
         #if user was replied to in the past 24 hours then continue
@@ -76,7 +77,7 @@ while True:
 
         tweettext=df['Full_text'].to_list()
         tweetids=df['Tweet_id'].to_list()
-        #if tweet text already present in replied tweets then continue
+        
 
         
         for tweet, ids in zip(tweettext,tweetids):
@@ -101,5 +102,9 @@ while True:
     replydict={'UserID': userid, 'TweetID': tweetid, 'Original_Tweet': originalTweet, 'Reply': post_tweets_dump, 'TimeStamp': timestamp}
     df1=pd.DataFrame.from_dict(replydict)
     df1.to_csv('Tweets_to_be_posted.csv')
+
+    run_posting()
+
+
 
 

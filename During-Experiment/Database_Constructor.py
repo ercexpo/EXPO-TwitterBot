@@ -45,17 +45,16 @@ def PopulateTableforTest():
         corrected_names.append(name)
         treatment_group.append('True')
         last_replied.append(dt_string)
-        bot_assigned.append('All')
         sinceid.append('12345')
 
     for i in tqdm(range(len(corrected_names))):
         conn=sqlite3.connect('database.db')
         c=conn.cursor()
 
-        mytuple=(corrected_names[i], treatment_group[i], last_replied[i], bot_assigned[i], sinceid[i])
+        mytuple=(corrected_names[i], treatment_group[i], last_replied[i], sinceid[i])
 
         sqlite_insert_with_param = """INSERT INTO users
-                          VALUES (?, ?, ?, ?, ?)"""
+                          VALUES (?, ?, ?, ?)"""
 
         c.execute(sqlite_insert_with_param, mytuple)
 
@@ -77,9 +76,9 @@ def ViewTable():
 
 
 if __name__ == "__main__":
-    CreateTable()
-    #PopulateTableforTest()
-    #ViewTable()
+    #CreateTable()
+    PopulateTableforTest()
+    ViewTable()
     a=[]
   
 

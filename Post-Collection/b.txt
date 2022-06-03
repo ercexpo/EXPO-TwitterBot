@@ -1,0 +1,7 @@
+Code Required for:
+1) Accounts they follow
+2) User liked the Tweet
+3) User responded to the Tweet
+4) Link Clicks
+5) Recent timeline of their Tweets
+6) If they liked the posts of the news accounts recommended (maybe)

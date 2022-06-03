@@ -8,6 +8,13 @@ import json
 import sqlite3
 from datetime import datetime
 
+def getinfo(response):
+    responsetweet_id=response.id_str
+    original_tweet_id=response.in_reply_to_status_id_str
+    original_user_id=response.in_reply_to_user_id_str
+    bot_id=response.user.id_str
+
+
 def UpdateLastReplied(userid):
     now = datetime.now()
     dt_string = now.strftime("%Y/%m/%d %H:%M:%S")
@@ -15,15 +22,20 @@ def UpdateLastReplied(userid):
     conn=sqlite3.connect('database.db')
     c=conn.cursor()
     c.execute("UPDATE users SET last_replied = (?) WHERE userid = (?)", dt_string, userid)
-    print("Set sinceID")
+    print("Set Last Replied")
     conn.commit()
     conn.close()
 
 
-
+#need to figure out how to get the specific bot account to reply to the user assigned to it. First will have to validate keys, then grant
+#the keys access to post via the 3 bot accounts
 
 
 def postTweets(token_dict,replies,tweetids,userIDs):
+    responsetweet_id=[]
+    original_tweet_id=[]
+    original_user_id=[]
+    bot_id=[]
     for reply, id, user in tqdm(zip(replies,tweetids, userIDs)):
             consumer_key=token_dict['consumer_key']
             consumer_secret=token_dict['consumer_secret'],
@@ -34,8 +46,18 @@ def postTweets(token_dict,replies,tweetids,userIDs):
             auth.set_access_token(access_token, access_token_secret)
             api = tw.API(auth, wait_on_rate_limit=True)
 
-            api.update_status(status = reply, in_reply_to_status_id = id , auto_populate_reply_metadata=True)
+            response=api.update_status(status = reply, in_reply_to_status_id = id , auto_populate_reply_metadata=True)
+            responsetweet_id.append(response.id_str)
+            original_tweet_id.append(response.in_reply_to_status_id_str)
+            original_user_id.append(response.in_reply_to_user_id_str)
+            bot_id.append(response.user.id_str)
             UpdateLastReplied(user)
+        
+    dict = {'responsetweet_id': responsetweet_id, 'original_tweet_id': original_tweet_id, 'original_user_id': original_user_id, 'bot_id': bot_id } 
+    df = pd.DataFrame(dict)
+    now = datetime.now()
+    dt_string = now.strftime("%Y/%m/%d %H:%M:%S")
+    df.to_csv('Replies/%s.csv' % (dt_string), index=False)
 
 #update time
     
@@ -60,6 +82,8 @@ def run_posting():
     replytweets=df['Reply'].to_list()
     tweetIDs=df['TweetID'].to_list()
     userIDs=df['UserIDs'].to_list()
+
+
 
         
 

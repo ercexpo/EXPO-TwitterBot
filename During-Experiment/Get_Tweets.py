@@ -76,7 +76,7 @@ def getTweets(token_dict, userid):
             continue
         else:
             df=pd.DataFrame(tweets)
-            Tweetliststr=df['tweet_id'].to_list
+            Tweetliststr=df['tweet_id'].to_list()
             int_list = list(map(int, Tweetliststr))
             setsinceID(user, max(int_list))
             df.to_csv('User-Tweets/%s.csv' % (user), index=False)
@@ -118,3 +118,5 @@ def run_collection():
 
     for thread in threads:
         thread.join()
+
+   
