@@ -30,36 +30,7 @@ def getPrevioustime(useridname):
 
     return result
 
-response_templates, news_templates, sports_df, entertainment_df, lifestyle_df = response.load_all_files()
-
-tokenizer, model = response.load_model()
-
-while True:
-   
-    sleep(28800 - time() % 28800)
-
-
-    now = datetime.now()
-    dt_string = now.strftime("%Y-%m-%d")
-	
-    #get-user-tweets
-    run_collection() #
-
-    post_tweets_dump=[]
-    userid=[]
-    originalTweet=[]
-    tweetid=[]
-    timestamp=[]
-
-    for user in tqdm(os.listdir("User-Tweets")):
-        df=pd.read_csv(user)
-
-        #if user in treatment group then continue with the rest
-        useridname=user.split(".csv")[0]
-        
-        if checkTreatment(useridname)== False: #might need to change this to a string
-            continue
-
+def gethours(useridname):
         #if user was replied to in the past 24 hours then continue
         previous_time=getPrevioustime(useridname)
         datetime_object = datetime.strptime(previous_time, '%m/%d/%y %H:%M:%S')
@@ -70,6 +41,47 @@ while True:
         c = a-b 
 
         hours = math.floor(c.total_seconds() / 3600)
+
+        return hours
+
+
+response_templates, news_templates, sports_df, entertainment_df, lifestyle_df = response.load_all_files()
+
+tokenizer, model = response.load_model()
+
+GLOBALCOUNT= 0
+
+while True:
+
+    GLOBALCOUNT= GLOBALCOUNT+1
+   
+    sleep(28800 - time() % 28800)
+
+
+    now = datetime.now()
+    dt_string = now.strftime("%Y-%m-%d")
+	
+    #get-user-tweets
+    run_collection(GLOBALCOUNT) #
+
+    post_tweets_dump=[]
+    userid=[]
+    originalTweet=[]
+    tweetid=[]
+    timestamp=[]
+
+    for user in tqdm(os.listdir("User-Tweets/%s", GLOBALCOUNT)):
+        df=pd.read_csv(user)
+
+        #if user in treatment group then continue with the rest
+        useridname=user.split(".csv")[0]
+        
+        if checkTreatment(useridname)== False: #might need to change this to a string
+            continue
+
+        hours=gethours(useridname)
+        #if user was replied to in the past 24 hours then continue
+
 
         if hours < 24:
             continue
@@ -101,9 +113,10 @@ while True:
         
     replydict={'UserID': userid, 'TweetID': tweetid, 'Original_Tweet': originalTweet, 'Reply': post_tweets_dump, 'TimeStamp': timestamp}
     df1=pd.DataFrame.from_dict(replydict)
-    df1.to_csv('Tweets_to_be_posted.csv')
+    df1.to_csv('Tweets_to_be_posted/%s.csv' % dt_string)
 
-    run_posting()
+    run_posting(dt_string)
+
 
 
 

@@ -74,11 +74,11 @@ def getTokens():
 
 
 
-def run_posting():
+def run_posting(timestamp):
     if os.path.exists('working-tokens.json'):
         tokens = json.load(open('working-tokens.json'))
 
-    df=pd.read_csv('Tweets_to_be_posted.csv')
+    df=pd.read_csv('Tweets_to_be_posted/%s.csv' % (timestamp))
     replytweets=df['Reply'].to_list()
     tweetIDs=df['TweetID'].to_list()
     userIDs=df['UserIDs'].to_list()

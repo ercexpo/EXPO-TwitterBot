@@ -59,7 +59,7 @@ def setsinceID(user, sinceid):
 
 
 
-def getTweets(token_dict, userid):
+def getTweets(token_dict, userid, GLOBALCOUNT):
     print(token_dict)
     for user in tqdm(userid):
 
@@ -75,11 +75,15 @@ def getTweets(token_dict, userid):
         if len(tweets)==0:
             continue
         else:
+            parent_dir=os.path.dirname(os.path.abspath(__file__))
+            newdir="User-Tweets/%s" % (GLOBALCOUNT)
+            path = os.path.join(parent_dir, newdir)
+            os.mkdir(path)
             df=pd.DataFrame(tweets)
             Tweetliststr=df['tweet_id'].to_list()
             int_list = list(map(int, Tweetliststr))
             setsinceID(user, max(int_list))
-            df.to_csv('User-Tweets/%s.csv' % (user), index=False)
+            df.to_csv('User-Tweets/%s/%s.csv' % (GLOBALCOUNT, user), index=False)
 
 def getTokens():
     token_arr = []
@@ -92,7 +96,7 @@ def getTokens():
     return (token_arr)
 
 
-def run_collection():
+def run_collection(GLOBALCOUNT):
     if os.path.exists('working-tokens.json'):
         tokens = json.load(open('working-tokens.json'))
     else:
@@ -112,7 +116,7 @@ def run_collection():
         token_dict = tokens[i]
         start = int(i * userid_PER_THREAD)
         thread_userid = userid[start: start + userid_PER_THREAD]
-        thread = Thread(target=getTweets, args=(token_dict, thread_userid, ))
+        thread = Thread(target=getTweets, args=(token_dict, thread_userid, GLOBALCOUNT, ))
         thread.start()
         threads.append(thread)
 

@@ -36,7 +36,6 @@ def PopulateTableforTest():
     corrected_names=[]
     treatment_group=[]
     last_replied=[]
-    bot_assigned=[]
     sinceid=[]
     
 
