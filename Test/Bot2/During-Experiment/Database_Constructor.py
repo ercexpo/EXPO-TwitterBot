@@ -40,6 +40,7 @@ def PopulateTableforTest():
     
 
     for name in names:
+        name=str(name)
         name=name.split('.csv')[0]
         corrected_names.append(name)
         treatment_group.append('True')
@@ -75,7 +76,7 @@ def ViewTable():
 
 
 if __name__ == "__main__":
-    #CreateTable()
+    CreateTable()
     PopulateTableforTest()
     ViewTable()
     a=[]
