@@ -103,9 +103,10 @@ def run_collection(GLOBALCOUNT):
         tokens = getTokens()
         json.dump(tokens, open('working-tokens.json', 'w'))
 
-    with open('UserDatabase.csv') as f:
+    with open('UserDatabase1 - Sheet1.csv') as f:
         userid = f.read().strip().split('\n')
-        userid=userid.split('.csv')[0]
+        print(userid)
+        #userid=userid.split('.csv')[0]
 
 
     NUM_THREADS = len(tokens) #equivalent to num tokens

@@ -83,7 +83,7 @@ while True:
         #if user was replied to in the past 24 hours then continue
 
 
-        if hours < 24:
+        if hours < 24 and GLOBALCOUNT != 0:
             continue
 
 

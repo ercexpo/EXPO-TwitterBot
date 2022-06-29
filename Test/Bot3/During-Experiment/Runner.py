@@ -51,18 +51,24 @@ tokenizer, model = response.load_model()
 
 GLOBALCOUNT= 0
 
+print('reached0')
+
 while True:
 
     GLOBALCOUNT= GLOBALCOUNT+1
    
-    sleep(28800 - time() % 28800)
+    #sleep(28800 - time() % 28800)
 
 
     now = datetime.now()
     dt_string = now.strftime("%Y-%m-%d")
+
+    print('reachedloop')
 	
     #get-user-tweets
     run_collection(GLOBALCOUNT) #
+
+    print('reachedgetTweets')
 
     post_tweets_dump=[]
     userid=[]
@@ -83,10 +89,11 @@ while True:
         #if user was replied to in the past 24 hours then continue
 
 
-        if hours < 24:
+        if hours < 24 and GLOBALCOUNT != 0:
             continue
 
 
+        print('reached1')
         tweettext=df['Full_text'].to_list()
         tweetids=df['Tweet_id'].to_list()
         
