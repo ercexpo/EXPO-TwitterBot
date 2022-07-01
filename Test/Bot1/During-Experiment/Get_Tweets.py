@@ -28,9 +28,14 @@ def get_tweet_responses(consumer_key, consumer_secret, access_token, access_toke
 
     tweets = []
 
+    for sta in tweet:
+        print(sta)
+    
+    tweet_full_text = tweet.full_text
+
 
     tweets.append(dict(
-        full_text = tweet.full_text,
+        full_text = tweet_full_text,
         tweet_id=tweet.id_str,
         screen_name=tweet.user.screen_name,
         user_ID=user
@@ -41,8 +46,8 @@ def get_tweet_responses(consumer_key, consumer_secret, access_token, access_toke
 def getsinceID(user):
     conn=sqlite3.connect('database.db')
     c=conn.cursor()
-    c.execute("SELECT sinceid FROM users WHERE userid=(?)",user)
-    result=c.fetch()
+    c.execute("SELECT sinceid FROM users WHERE userid=(?)",[user])
+    result=c.fetchall()
     print("Got Sinceid")
     conn.commit()
     conn.close()
