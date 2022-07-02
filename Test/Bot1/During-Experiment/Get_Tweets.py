@@ -22,22 +22,23 @@ def get_tweet_responses(consumer_key, consumer_secret, access_token, access_toke
 
     tweet = tw.Cursor(api.user_timeline,
             user_id=user, count=10,
-            since_id=since,
             exclude_replies=True, include_rts=False,
             tweet_mode='extended').items(num_tweets)
 
     tweets = []
 
-    for sta in tweet:
-        print(sta)
-    
-    tweet_full_text = tweet.full_text
+
+    tweet_full_text, tweet_id_str, tweet_user_name = [], [], []
+    for t in tweet:
+        tweet_full_text.append(t.full_text)
+        tweet_id_str.append(t.id_str) 
+        tweet_user_name.append(t.user.screen_name)
 
 
     tweets.append(dict(
         full_text = tweet_full_text,
-        tweet_id=tweet.id_str,
-        screen_name=tweet.user.screen_name,
+        tweet_id=tweet_id_str,
+        screen_name=tweet_user_name,
         user_ID=user
     ))
    
