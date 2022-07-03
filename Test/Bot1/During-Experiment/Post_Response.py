@@ -57,7 +57,7 @@ def postTweets(token_dict,replies,tweetids,userIDs):
     df = pd.DataFrame(dict)
     now = datetime.now()
     dt_string = now.strftime("%Y/%m/%d %H:%M:%S")
-    df.to_csv('Replies/%s.csv' % (dt_string), index=False)
+    df.to_csv('%s.csv' % ('Reply1'), index=False)
 
 #update time
     
