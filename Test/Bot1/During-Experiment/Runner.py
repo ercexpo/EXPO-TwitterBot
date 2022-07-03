@@ -17,7 +17,7 @@ from Post_Response import run_posting
 def checkTreatment(useridname):
     conn=sqlite3.connect('database.db')
     c=conn.cursor()
-    c.execute("SELECT Treatment FROM users WHERE userid = (?)", useridname)
+    c.execute("SELECT Treatment FROM users WHERE userid = (?)", [useridname])
     result=c.fetchone()
 
     return result
@@ -25,18 +25,18 @@ def checkTreatment(useridname):
 def getPrevioustime(useridname):
     conn=sqlite3.connect('database.db')
     c=conn.cursor()
-    c.execute("SELECT last_replied FROM users WHERE userid = (?)", useridname)
+    c.execute("SELECT last_replied FROM users WHERE userid = (?)", [useridname])
     result=c.fetchone()
 
-    return result
+    return result[0]
 
 def gethours(useridname):
         #if user was replied to in the past 24 hours then continue
         previous_time=getPrevioustime(useridname)
-        datetime_object = datetime.strptime(previous_time, '%m/%d/%y %H:%M:%S')
+        datetime_object = datetime.strptime(previous_time, '%Y/%m/%d %H:%M:%S')
 
-        a = datetime.datetime(now.year, now.month, now.day, now.hour, now.minute, now.second)
-        b=datetime.datetime(datetime_object.year,datetime_object.month, datetime_object.day, datetime_object.hour, datetime_object.minute, datetime_object.second)
+        a = datetime(now.year, now.month, now.day, now.hour, now.minute, now.second)
+        b=datetime(datetime_object.year,datetime_object.month, datetime_object.day, datetime_object.hour, datetime_object.minute, datetime_object.second)
 
         c = a-b 
 
@@ -78,8 +78,8 @@ while True:
     tweetid=[]
     timestamp=[]
 
-    for user in tqdm(os.listdir("User-Tweets/%s", GLOBALCOUNT)):
-        df=pd.read_csv(user)
+    for user in tqdm(os.listdir("User-Tweets/{}".format(GLOBALCOUNT))):
+        df=pd.read_csv("User-Tweets/{}/{}".format(GLOBALCOUNT,user))
 
         #if user in treatment group then continue with the rest
         useridname=user.split(".csv")[0]
@@ -95,8 +95,8 @@ while True:
             continue
 
         print('reached1')
-        tweettext=df['Full_text'].to_list()
-        tweetids=df['Tweet_id'].to_list()
+        tweettext=df['full_text'].to_list()
+        tweetids=df['tweet_id'].to_list()
         
 
         

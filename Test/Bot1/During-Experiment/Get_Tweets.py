@@ -20,22 +20,24 @@ def get_tweet_responses(consumer_key, consumer_secret, access_token, access_toke
     #add sinceid here
     #open database, get sinceid as the max of the previous collected TwitterIDs and add as a parameter
     
-
-    tweetsReq = tw.Cursor(api.user_timeline,
+    tweets = []
+    try:
+        tweetsReq = tw.Cursor(api.user_timeline,
             user_id=user, count=10,
             exclude_replies=True, include_rts=False,
             tweet_mode='extended').items(num_tweets)
-
     
-    tweets = []
-    for tweet in tweetsReq:
-        tweets.append(dict(
-            full_text = tweet.full_text,
-            tweet_id=tweet.id_str,
-            screen_name=tweet.user.screen_name,
-            user_id=tweet.user.id_str
-        ))
-   
+    
+        for tweet in tweetsReq:
+            tweets.append(dict(
+                full_text = tweet.full_text,
+                tweet_id=tweet.id_str,
+                screen_name=tweet.user.screen_name,
+                user_id=tweet.user.id_str
+            ))
+    except Exception as e:
+        print("Key error, moving on..")
+
     return tweets
 
 def getsinceID(user):
@@ -52,7 +54,7 @@ def getsinceID(user):
 def setsinceID(user, sinceid):
     conn=sqlite3.connect('database.db')
     c=conn.cursor()
-    c.execute("UPDATE users SET sinceid = (?) WHERE userid = (?)", sinceid, user)
+    c.execute("UPDATE users SET sinceid = (?) WHERE userid = (?)", (sinceid, user))
     print("Set sinceID")
     conn.commit()
     conn.close()
@@ -65,7 +67,7 @@ def getTweets(token_dict, userid, GLOBALCOUNT):
     newdir="User-Tweets/%s" % (GLOBALCOUNT)
     path = os.path.join(parent_dir, newdir)
     #print(path, len(tweets), userid)
-    os.mkdir(path)
+    #os.mkdir(path)
 
     for user in tqdm(userid):
 
@@ -78,7 +80,7 @@ def getTweets(token_dict, userid, GLOBALCOUNT):
             token_dict['access_token_secret'],
             user, num_tweets=10, since=since1
         )
-        if len(tweets)==0:
+        if len(tweets)==0: #get_tweet_responses can return None!!
             continue
         else:
             df=pd.DataFrame(tweets)
