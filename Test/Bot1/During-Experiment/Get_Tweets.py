@@ -87,7 +87,7 @@ def getTweets(token_dict, userid, GLOBALCOUNT):
             Tweetliststr=df['tweet_id'].to_list()
             int_list = list(map(int, Tweetliststr))
             setsinceID(user, max(int_list))
-            df.to_csv('User-Tweets/%s/%s.csv' % (GLOBALCOUNT, user), index=False)
+            df.to_csv('User-Tweets/%s/%s.csv' % (GLOBALCOUNT, user), index=False) #WRITE TO PICKLE
 
 def getTokens():
     token_arr = []

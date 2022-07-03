@@ -80,7 +80,7 @@ while True:
     timestamp=[]
 
     for user in tqdm(os.listdir("User-Tweets/{}".format(GLOBALCOUNT))):
-        df=pd.read_csv("User-Tweets/{}/{}".format(GLOBALCOUNT,user))
+        df=pd.read_csv("User-Tweets/{}/{}".format(GLOBALCOUNT,user)) #AC: READ FROM PICKLE
 
         #if user in treatment group then continue with the rest
         useridname=user.split(".csv")[0]
@@ -124,7 +124,7 @@ while True:
         
     replydict={'UserID': userid, 'TweetID': tweetid, 'Original_Tweet': originalTweet, 'Reply': post_tweets_dump, 'TimeStamp': timestamp}
     df1=pd.DataFrame.from_dict(replydict)
-    df1.to_csv('tweets_to_be_posted/temp.csv', index=False)
+    df1.to_csv('tweets_to_be_posted/temp.csv', index=False) #WRITE TO PICKLE
 
     run_posting(dt_string)
 

@@ -21,7 +21,7 @@ def UpdateLastReplied(userid):
 
     conn=sqlite3.connect('database.db')
     c=conn.cursor()
-    c.execute("UPDATE users SET last_replied = (?) WHERE userid = (?)", dt_string, userid)
+    c.execute("UPDATE users SET last_replied = (?) WHERE userid = (?)", (dt_string, userid))
     print("Set Last Replied")
     conn.commit()
     conn.close()
@@ -36,10 +36,12 @@ def postTweets(token_dict,replies,tweetids,userIDs):
     original_tweet_id=[]
     original_user_id=[]
     bot_id=[]
+    #print(replies, tweetids, userIDs)
     for reply, id, user in tqdm(zip(replies,tweetids, userIDs)):
+            print(reply, id, user)
             consumer_key=token_dict['consumer_key']
-            consumer_secret=token_dict['consumer_secret'],
-            access_token=token_dict['access_token'],
+            consumer_secret=token_dict['consumer_secret']
+            access_token=token_dict['access_token']
             access_token_secret=token_dict['access_token_secret']
 
             auth = tw.OAuthHandler(consumer_key, consumer_secret)
@@ -57,7 +59,7 @@ def postTweets(token_dict,replies,tweetids,userIDs):
     df = pd.DataFrame(dict)
     now = datetime.now()
     dt_string = now.strftime("%Y/%m/%d %H:%M:%S")
-    df.to_csv('%s.csv' % ('Reply1'), index=False)
+    df.to_csv('%s.csv' % ('Reply1'), index=False) #WRITE TO PICKLE
 
 #update time
     
@@ -78,7 +80,7 @@ def run_posting(timestamp):
     if os.path.exists('working-tokens.json'):
         tokens = json.load(open('working-tokens.json'))
 
-    df=pd.read_csv('tweets_to_be_posted/temp.csv')
+    df=pd.read_csv('tweets_to_be_posted/temp.csv') #READ TO PICKLE
     #print(df.columns)
     replytweets=df['Reply'].to_list()
     tweetIDs=df['TweetID'].to_list()
