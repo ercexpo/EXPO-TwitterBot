@@ -7,6 +7,7 @@ import os
 import json
 import sqlite3
 
+os.environ['MKL_THREADING_LAYER'] = 'GNU'
 
 # DATE = "2022-05-05"
 
@@ -20,27 +21,20 @@ def get_tweet_responses(consumer_key, consumer_secret, access_token, access_toke
     #open database, get sinceid as the max of the previous collected TwitterIDs and add as a parameter
     
 
-    tweet = tw.Cursor(api.user_timeline,
+    tweetsReq = tw.Cursor(api.user_timeline,
             user_id=user, count=10,
             exclude_replies=True, include_rts=False,
             tweet_mode='extended').items(num_tweets)
 
+    
     tweets = []
-
-
-    tweet_full_text, tweet_id_str, tweet_user_name = [], [], []
-    for t in tweet:
-        tweet_full_text.append(t.full_text)
-        tweet_id_str.append(t.id_str) 
-        tweet_user_name.append(t.user.screen_name)
-
-
-    tweets.append(dict(
-        full_text = tweet_full_text,
-        tweet_id=tweet_id_str,
-        screen_name=tweet_user_name,
-        user_ID=user
-    ))
+    for tweet in tweetsReq:
+        tweets.append(dict(
+            full_text = tweet.full_text,
+            tweet_id=tweet.id_str,
+            screen_name=tweet.user.screen_name,
+            user_id=tweet.user.id_str
+        ))
    
     return tweets
 
@@ -67,6 +61,12 @@ def setsinceID(user, sinceid):
 
 def getTweets(token_dict, userid, GLOBALCOUNT):
     print(token_dict)
+    parent_dir=os.path.dirname(os.path.abspath(__file__))
+    newdir="User-Tweets/%s" % (GLOBALCOUNT)
+    path = os.path.join(parent_dir, newdir)
+    #print(path, len(tweets), userid)
+    os.mkdir(path)
+
     for user in tqdm(userid):
 
         since1=getsinceID(user)
@@ -81,10 +81,6 @@ def getTweets(token_dict, userid, GLOBALCOUNT):
         if len(tweets)==0:
             continue
         else:
-            parent_dir=os.path.dirname(os.path.abspath(__file__))
-            newdir="User-Tweets/%s" % (GLOBALCOUNT)
-            path = os.path.join(parent_dir, newdir)
-            os.mkdir(path)
             df=pd.DataFrame(tweets)
             Tweetliststr=df['tweet_id'].to_list()
             int_list = list(map(int, Tweetliststr))
