@@ -13,6 +13,7 @@ from tqdm.auto import tqdm
 import math
 import sqlite3
 from Post_Response import run_posting
+import torch
 
 def checkTreatment(useridname):
     conn=sqlite3.connect('database.db')
@@ -105,8 +106,10 @@ while True:
             interact, topic = matchKeywords(tweet)
 
             if interact == True:
-                generated_responses = response.run_model(list(tweet), tokenizer, model, response_templates)
+                print(torch.cuda.is_available())
+                generated_responses = response.run_model([tweet], tokenizer, model, response_templates)
                 generated_output=response.append_url(topic, generated_responses, news_templates, sports_df, entertainment_df, lifestyle_df)
+                print("Generated Output!")
                 post_tweets_dump.append(generated_output)
                 originalTweet.append(tweet)
                 tweetid.append(ids)
@@ -114,14 +117,14 @@ while True:
                 now = datetime.now()
                 dt_string = now.strftime("%Y/%m/%d %H:%M:%S")
                 timestamp.append(dt_string)
-                
+                print("Interaction Complete!")
 
             else:
                 continue
         
     replydict={'UserID': userid, 'TweetID': tweetid, 'Original_Tweet': originalTweet, 'Reply': post_tweets_dump, 'TimeStamp': timestamp}
     df1=pd.DataFrame.from_dict(replydict)
-    df1.to_csv('Tweets_to_be_posted/%s.csv' % dt_string)
+    df1.to_csv('tweets_to_be_posted/temp.csv', index=False)
 
     run_posting(dt_string)
 

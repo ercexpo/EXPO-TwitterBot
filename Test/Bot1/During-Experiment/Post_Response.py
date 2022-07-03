@@ -78,10 +78,11 @@ def run_posting(timestamp):
     if os.path.exists('working-tokens.json'):
         tokens = json.load(open('working-tokens.json'))
 
-    df=pd.read_csv('Tweets_to_be_posted/%s.csv' % (timestamp))
+    df=pd.read_csv('tweets_to_be_posted/temp.csv')
+    #print(df.columns)
     replytweets=df['Reply'].to_list()
     tweetIDs=df['TweetID'].to_list()
-    userIDs=df['UserIDs'].to_list()
+    userIDs=df['UserID'].to_list()
 
 
 
