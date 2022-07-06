@@ -4,7 +4,6 @@
 import pandas as pd
 from collections import Counter
 import random
-import re
 
 # examples
 # input1 = 'Another player I’d like for the Knicks to take a hard look at if they’re picking in that real end-of-lotto range… RJ, Grimes, Reddish, Sochan would be a very cool core of young wings for NYK - defensively versatile and able to move the rock sharply https://t.co/jeZkws6wZ7'
@@ -14,25 +13,19 @@ import re
 # input5 = "Travis d'arnaud already got his wedding ring, so he's going after an Oscars Trophy this time"
 # matchKeywords(input1)
 
-def check_word_in(phrase, text):
-    return re.search(r"\b{}\b".format(phrase), text, re.IGNORECASE) is not None
-
-def match_keywords(text):
+def matchKeywords(text):
 
     # get keywords
-    keyword_df = pd.read_csv("utils/keywords.csv")
+    keyword_df = pd.read_csv("Twitter Bot Keywords (Final).csv")
     keywords = list(keyword_df['keyword'])
 
     # pre-processing
     text = text.lower() # what else? stemming? getting rid of ', like in Oscar's?
 
-    matches = []
+    matches =[]
 
     # get all matches
-    #matches = [word for word in keywords if (word in text)]
-    for word in keywords:
-        if check_word_in(word, text):
-            matches.append(word)
+    matches = [word for word in keywords if (word in text)]
 
     # get topics of all matches
     topics = []

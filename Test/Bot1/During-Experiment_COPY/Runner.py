@@ -46,32 +46,23 @@ def gethours(useridname):
         return hours
 
 
+#Prepare response generator model/files
 response_templates, news_templates, sports_df, entertainment_df, lifestyle_df = response.load_all_files()
-
 tokenizer, model = response.load_model()
 
-GLOBALCOUNT= 0
-
-print('reached0')
+# Initialize variable indicating global iteration of the code
+GLOBALCOUNT = 0
 
 while True:
 
-    GLOBALCOUNT= GLOBALCOUNT+1
+    GLOBALCOUNT += 1
    
     #sleep(28800 - time() % 28800)
-
-
-
 
     now = datetime.now()
     dt_string = now.strftime("%Y-%m-%d")
 
-    print('reachedloop')
-	
-    #get-user-tweets
-    run_collection(GLOBALCOUNT) #
-
-    print('reachedgetTweets')
+    run_collection(GLOBALCOUNT) 
 
     post_tweets_dump=[]
     userid=[]

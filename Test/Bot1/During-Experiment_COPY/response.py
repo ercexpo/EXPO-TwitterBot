@@ -9,14 +9,14 @@ import random
 
 def load_all_files():
     # Load template responses file
-    response_templates = pd.read_csv('utils/response_templates.csv')['templates'].to_list()
+    response_templates = pd.read_csv('response_utils/response_templates.csv')['templates'].to_list()
 
 
     # Load news templates and info
-    news_templates = pd.read_csv('utils/news_templates.csv')['templates'].to_list()
-    sports_df = pd.read_csv('utils/sports.csv')
-    entertainment_df = pd.read_csv('utils/entertainment.csv')
-    lifestyle_df = pd.read_csv('utils/lifestyle.csv')
+    news_templates = pd.read_csv('response_utils/news_templates.csv')['templates'].to_list()
+    sports_df = pd.read_csv('response_utils/sports.csv')
+    entertainment_df = pd.read_csv('response_utils/entertainment.csv')
+    lifestyle_df = pd.read_csv('response_utils/lifestyle.csv')
 
     return (response_templates, news_templates, sports_df, entertainment_df, lifestyle_df)
 
@@ -27,7 +27,7 @@ def load_all_files():
 def is_faulty(original, response):
 
     # Load stopwords file
-    stop_file = open("utils/stopwords.txt", "r")
+    stop_file = open("response_utils/stopwords.txt", "r")
     try:
         content = stop_file.read()
         stop_words = content.split(",")
@@ -75,7 +75,6 @@ def is_faulty(original, response):
                "I'm not sure if you're being serious",
                "I'm not sure if you're sarcastic",
                "I'm not sure if you're being sarcastic",
-               "I love lamp",
                ]
     for option in options:
       if response.startswith(option):
@@ -139,7 +138,6 @@ def run_model(tweets, tokenizer, model, response_templates):
 
 def append_url(topic, response, news_templates, sports_df, entertainment_df, lifestyle_df):
     if topic == 'Sport':
-        topic = 'Sports'
         df = sports_df
     elif topic == 'Entertainment':
         df = entertainment_df
@@ -150,7 +148,7 @@ def append_url(topic, response, news_templates, sports_df, entertainment_df, lif
     sampled_df = df.sample(1)
 
     random_template = random.choice(news_templates)
-    random_template = random_template.replace("topic", topic.lower())
+    random_template = random_template.replace("topic", topic)
     random_template = random_template.replace("@media", sampled_df['media'].to_list()[0])
     random_template = random_template.replace("URL", sampled_df["url"].to_list()[0])
 
