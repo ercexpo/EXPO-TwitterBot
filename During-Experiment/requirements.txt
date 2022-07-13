@@ -1,5 +1,0 @@
-transformers
-pandas
-alt-profanity-check
-torch
-tweepy
