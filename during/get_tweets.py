@@ -8,6 +8,8 @@ import json
 import sqlite3
 from collections import defaultdict
 import json
+from queue import Queue
+from datetime import datetime
 
 os.environ['MKL_THREADING_LAYER'] = 'GNU'
 
@@ -22,6 +24,7 @@ def get_tweet_responses(consumer_key, consumer_secret, access_token, access_toke
         tweetsReq = tw.Cursor(api.user_timeline,
             user_id=user, count=10,
             exclude_replies=True, include_rts=False,
+            since_id = since, ##
             tweet_mode='extended').items(num_tweets)
     
     
@@ -30,16 +33,16 @@ def get_tweet_responses(consumer_key, consumer_secret, access_token, access_toke
                 full_text = tweet.full_text,
                 tweet_id=tweet.id_str,
                 screen_name=tweet.user.screen_name,
-                user_id=tweet.user.id_str
+                user_id=tweet.user.id_str,
+                created=tweet.created_at,
             ))
     except Exception as e:
-        #print("\nKey error, moving on..")
         print(e)
 
     return tweets
 
-def get_sinceID(user):
-    conn=sqlite3.connect('data/database.db')
+def get_sinceID(user, db_file):
+    conn=sqlite3.connect(db_file) ##
     c=conn.cursor()
     c.execute("SELECT sinceid FROM users WHERE userid=(?)",[user])
     result=c.fetchall()
@@ -48,23 +51,21 @@ def get_sinceID(user):
 
     return result
 
-def set_sinceID(user, sinceid):
-    conn=sqlite3.connect('data/database.db')
+def set_sinceID(user, sinceid, db_file):
+    conn=sqlite3.connect(db_file) ##
     c=conn.cursor()
     c.execute("UPDATE users SET sinceid = (?) WHERE userid = (?)", (sinceid, user))
     conn.commit()
     conn.close()
 
 
-def get_tweets(token_dict, userid, GLOBALCOUNT):
-    #print(token_dict)
-    #parent_dir=os.path.dirname(os.path.abspath(__file__))
-    #newdir="User-Tweets/%s" % (GLOBALCOUNT)
-    #path = os.path.join(parent_dir, newdir)
-
+def get_tweets(token_dict, userid, GLOBALCOUNT, db_file, q):
     for user in tqdm(userid):
 
-        since_var = get_sinceID(user)
+        if GLOBALCOUNT == 1: ##
+            since_var = None
+        else:
+            since_var = get_sinceID(user, db_file)
 
         tweets = get_tweet_responses(
             token_dict['consumer_key'],
@@ -77,62 +78,71 @@ def get_tweets(token_dict, userid, GLOBALCOUNT):
         if len(tweets)==0: #get_tweet_responses can return None
             continue
         else:
-            df = pd.DataFrame(tweets)
-            tweet_list_str = df['tweet_id'].to_list()
-            int_list = list(map(int, tweet_list_str))
-            set_sinceID(user, max(int_list))
-            #df.to_csv('User-Tweets/%s/%s.csv' % (GLOBALCOUNT, user), index=False) #WRITE TO PICKLE
-            global_count_list = [GLOBALCOUNT] * len(tweet_list_str)
-            user_id_list = [user]* len(tweet_list_str)
-            df['GLOBALCOUNT'] = global_count_list
-            df['user'] = user_id_list
-
-            if os.path.isfile('data/df.pkl'):
-                loaded_df = pd.read_pickle('data/df.pkl')
-                df = pd.concat([loaded_df, df], ignore_index=True, sort=False)
-
-            df.to_pickle('data/df.pkl')
+            q.put(tweets)
 
 
-def get_tokens():
+def get_tokens(token_file):
     token_arr = []
-    with open('tokens.txt') as f:
+    with open(token_file) as f:
         tokens = f.read().strip().split('\n')
         for token in tokens:
-            consumer_key,consumer_secret,access_token,access_token_secret = token.split('|')
+            consumer_key,consumer_secret,access_token,access_token_secret = token.split(',') ## token.split('|')
             token_arr.append(dict(consumer_key=consumer_key,consumer_secret=consumer_secret,access_token=access_token,access_token_secret=access_token_secret))
 
     return token_arr
 
+def get_days_passed(twitter_date): #Only accepts twitter date format (UTC)
+    dtime = twitter_date.to_pydatetime().strftime("%Y/%m/%d %H:%M:%S")
+    now = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+    dtime, now = pd.to_datetime(dtime), pd.to_datetime(now)
+    return (now-dtime).days
 
-def run_collection(GLOBALCOUNT, user_file=None):
-    if user_file is None:
-        user_file = 'users.csv'
+def run_collection(GLOBALCOUNT, user_file, db_file, token_file):
+    df_pkl_file = 'data/' + user_file.split('users/')[1].split('.csv')[0] + '_df.pkl'
 
-    if os.path.exists('working-tokens.json'):
-        tokens = json.load(open('working-tokens.json'))
-    else:
-        tokens = get_tokens()
-        json.dump(tokens, open('working-tokens.json', 'w'))
+    tokens = get_tokens(token_file) ##
 
-    #with open(user_file) as f:
-    #    userid = f.read().strip().split('\n')
-    user_df = pd.read_csv('users.csv')
+    user_df = pd.read_csv(user_file) #
     userid = user_df['UserIDs'].apply(lambda x: str(x)).to_list()
 
     NUM_THREADS = len(tokens) #equivalent to num tokens
     userid_per_thread = ceil(len(userid) / len(tokens))
+
+    res_q = Queue() #can't write to files in threads-> race condition!. We will use a Queue (thread-safe) to store results instead and write to file later
 
     threads = []
     for i in range(NUM_THREADS):
         token_dict = tokens[i]
         start = int(i * userid_per_thread)
         thread_userid = userid[start:start + userid_per_thread]
-        thread = Thread(target=get_tweets, args=(token_dict, thread_userid, GLOBALCOUNT, ))
+        thread = Thread(target=get_tweets, args=(token_dict, thread_userid, GLOBALCOUNT, db_file, res_q, ))
         thread.start()
         threads.append(thread)
 
     for thread in threads:
         thread.join()
 
-   
+    while not res_q.empty():
+        res = res_q.get()
+        df = pd.DataFrame(res)
+
+        if GLOBALCOUNT == 1: #for first time collection, ensure that the tweets are no older than 7 days
+            df = df[df['created'].apply(get_days_passed) <= 7]
+            if len(df) == 0: #in case we removed all collected tweets!
+                continue
+
+        user = res[0]['user_id'] #all user ids should be same for one thread collection
+        tweet_list_str = df['tweet_id'].to_list()
+        int_list = list(map(int, tweet_list_str))
+        set_sinceID(user, max(int_list), db_file)
+        global_count_list = [GLOBALCOUNT] * len(tweet_list_str)
+        user_id_list = [user]* len(tweet_list_str)
+        df['GLOBALCOUNT'] = global_count_list
+        df['user'] = user_id_list
+
+        if os.path.isfile(df_pkl_file): ##
+            loaded_df = pd.read_pickle(df_pkl_file) ##
+            df = pd.concat([loaded_df, df], ignore_index=True, sort=False)
+
+        df.to_pickle(df_pkl_file)
+    

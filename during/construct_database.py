@@ -7,8 +7,8 @@ import sqlite3
 from tqdm.auto import tqdm
 import sys
 
-def CreateTable():
-    conn=sqlite3.connect('data/database.db')
+def CreateTable(db_filename):
+    conn=sqlite3.connect(db_filename) ##
     c=conn.cursor()
     c.execute("""CREATE TABLE users (
     userid TEXT,
@@ -22,7 +22,7 @@ def CreateTable():
     conn.commit()
     conn.close()
 
-def PopulateTableforTest(user_file = 'users.csv'):
+def PopulateTableforTest(user_file, db_file):
 
     now = datetime.now()
     dt_string = now.strftime("%Y/%m/%d %H:%M:%S")
@@ -49,7 +49,7 @@ def PopulateTableforTest(user_file = 'users.csv'):
         sinceid.append('12345')
 
     for i in tqdm(range(len(corrected_names))):
-        conn=sqlite3.connect('data/database.db')
+        conn=sqlite3.connect(db_file) ##
         c=conn.cursor()
 
         mytuple=(corrected_names[i], treatment_group[i], last_replied[i], sinceid[i])
@@ -65,8 +65,8 @@ def PopulateTableforTest(user_file = 'users.csv'):
         conn.close()
 
 
-def ViewTable():
-    conn=sqlite3.connect('data/database.db')
+def ViewTable(db_file):
+    conn=sqlite3.connect(db_file)
     c=conn.cursor()
     c.execute("SELECT * FROM users")
     print(c.fetchmany(5))
@@ -79,10 +79,11 @@ def ViewTable():
 if __name__ == "__main__":
     try:
         user_filename = sys.argv[1]
+        db_filename = sys.argv[2]
     except:
-        user_filename='users.csv'
+        print("Please add userfile and db file")
 
-    CreateTable()
-    PopulateTableforTest(user_filename)
-    ViewTable()
+    CreateTable(db_filename)
+    PopulateTableforTest(user_filename, db_filename)
+    ViewTable(db_filename)
  

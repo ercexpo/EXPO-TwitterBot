@@ -1,3 +1,4 @@
+
 import csv
 import pandas as pd
 from datetime import datetime, timedelta
@@ -16,6 +17,7 @@ from post_response import run_posting
 import torch
 import sys
 import numpy as np
+import argparse
 
 def check_treatment(useridname, db_file):
     conn=sqlite3.connect(db_file)
@@ -47,29 +49,40 @@ def get_hours(useridname, db_file):
 
         return hours
 
-'''
-def obtain_treatment_dict(user_file):
-    tdict = defaultdict()
-    u_df = pd.read_csv(userfile)
-    for i in range(len(u_df)):
-        username = u_df.iloc[i]['UserIDs']
-        treatment = u_df.iloc[i]['treatment']
-        tdict[username] = treatment
-'''
-
-#Prepare response generator model/files
-response_templates, news_templates, sports_df, entertainment_df, lifestyle_df = response.load_all_files()
-tokenizer, model = response.load_model()
-
-# Initialize variable indicating global iteration of the code
-GLOBALCOUNT = 0
 
 if __name__ == "__main__":
-    try:
-        user_file = sys.argv[1]
-        db_file = sys.argv[2]
-    except:
-        print("Please provide a user file and database file as input")
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-u", "--user_file", help="Path to user file", type=str, required=True)
+    parser.add_argument("-db", "--db_file", help="Path to database file", type=str, required=True)
+    parser.add_argument("-t", "--token_file", help="Path to token file", type=str, required=True)
+    parser.add_argument("-c", "--control_bool", help="Boolean indicating whether this is a control group experiment", type=str, required=True)
+    parser.add_argument("-p", "--post_bool", help="Boolean indicating whether we should post generated responses", type=str, required=True)
+
+    args = parser.parse_args()
+    user_file = args.user_file
+    db_file = args.db_file
+    token_file = args.token_file
+    control_bool = args.control_bool.lower()
+    post_bool = args.post_bool.lower()
+
+    if control_bool == "true":
+        control_bool = True
+    else:
+        control_bool = False
+    if post_bool == "true":
+        post_bool = True
+    else:
+        post_bool = False
+
+    #print(user_file, db_file, token_file, post_bool, control_bool)
+
+    #Prepare response generator model/files
+    response_templates, news_templates, sports_df, entertainment_df, lifestyle_df = response.load_all_files()
+    tokenizer, model = response.load_model()
+
+    # Initialize variable indicating global iteration of the code
+    GLOBALCOUNT = 0
 
 
     while True:
@@ -80,16 +93,18 @@ if __name__ == "__main__":
         now = datetime.now()
         dt_string = now.strftime("%Y-%m-%d")
 
-        run_collection(GLOBALCOUNT, user_file) 
-        #treatment_dict = obtain_treatment_dict(user_file)
+        run_collection(GLOBALCOUNT, user_file, db_file, token_file) 
 
         post_tweets_dump=[]
         userid=[]
         originalTweet=[]
         tweetid=[]
         timestamp=[]
+        gc = []
+        sname = []
 
-        data_df = pd.read_pickle('data/df.pkl')
+        df_pkl_file = 'data/' + user_file.split('users/')[1].split('.csv')[0] + '_df.pkl'
+        data_df = pd.read_pickle(df_pkl_file)
         print(data_df)
 
         sub_df = data_df[data_df['GLOBALCOUNT'] == GLOBALCOUNT]
@@ -97,60 +112,65 @@ if __name__ == "__main__":
 
         done_check = defaultdict(lambda: False)
 
-        for useridname in tqdm(np.unique(users_list)):
-            df = sub_df[sub_df['user'] == useridname]
+        for idx in tqdm(range(len(sub_df))):
+            useridname = sub_df.iloc[idx]['user']
+            tweet = sub_df.iloc[idx]['full_text']
+            ids = sub_df.iloc[idx]['tweet_id']
 
             #if user in treatment group then continue with the rest
-        
-            #if check_treatment(useridname)== False: #might need to change this to a string
-            #    continue
+            if control_bool:
+                continue
 
             hours=get_hours(useridname, db_file)
             #if user was replied to in the past 24 hours then continue
-
 
             if GLOBALCOUNT != 1:
                 if hours < 24:
                     continue
 
-            tweet_text=df['full_text'].to_list()
-            tweet_ids=df['tweet_id'].to_list()
+            if done_check[ids]:
+               continue
+
+            #match tweet
+            interact, topic = match_keywords(tweet)
+
+            if interact:
+                generated_responses = response.run_model([tweet], tokenizer, model, response_templates)
+                generated_output=response.append_url(topic, generated_responses, news_templates, sports_df, entertainment_df, lifestyle_df)
+                post_tweets_dump.append(generated_output)
+                originalTweet.append(tweet)
+                tweetid.append(ids)
+                userid.append(useridname)
+                now = datetime.now()
+                dt_string = now.strftime("%Y/%m/%d %H:%M:%S")
+                timestamp.append(dt_string)
+                gc.append(GLOBALCOUNT)
+                sname.append(sub_df.iloc[idx]['screen_name'])
+                done_check[ids] = True
+            else:
+                continue
         
-
-            for tweet, ids in zip(tweet_text,tweet_ids):
-                if done_check[ids]:
-                    continue
-                #match tweet
-                interact, topic = match_keywords(tweet)
-                #print(interact, topic, tweet)
-
-                if interact:
-                    generated_responses = response.run_model([tweet], tokenizer, model, response_templates)
-                    generated_output=response.append_url(topic, generated_responses, news_templates, sports_df, entertainment_df, lifestyle_df)
-                    post_tweets_dump.append(generated_output)
-                    originalTweet.append(tweet)
-                    tweetid.append(ids)
-                    userid.append(useridname)
-                    now = datetime.now()
-                    dt_string = now.strftime("%Y/%m/%d %H:%M:%S")
-                    timestamp.append(dt_string)
-                    done_check[ids] = True
-
-                else:
-                    continue
-        
-        replydict={'UserID': userid, 'TweetID': tweetid, 'Original_Tweet': originalTweet, 'Reply': post_tweets_dump, 'TimeStamp': timestamp}
-        reply_df=pd.DataFrame.from_dict(replydict)
+        replydict={'UserID': userid, 'Screen_Name': sname, 'TweetID': tweetid, 'Original_Tweet': originalTweet, 'Reply': post_tweets_dump, 'GLOBALCOUNT': gc, 'TimeStamp': timestamp}
+        reply_df=pd.DataFrame(replydict)
 
         print(reply_df)
 
-        #run_posting(reply_df, dt_string, treatment_dict) #UNCOMMENT
+        if post_bool:
+            run_posting(reply_df, dt_string, user_file, db_file, token_file)
+        else:
+            rdf_pkl_file = 'data/' + user_file.split('users/')[1].split('.csv')[0] + '_replies_df.pkl'
+            if os.path.isfile(rdf_pkl_file): ##
+                loaded_df = pd.read_pickle(rdf_pkl_file) ##
+                reply_df = pd.concat([loaded_df, reply_df], ignore_index=True, sort=False)
 
-        #sleep(28800 - time() % 28800) #UNCOMMENT
+            reply_df.to_pickle(rdf_pkl_file) ##
 
-        break
 
-    
+        #sleep(28800 - time() % 28800) #8 hours previously
+        sleep(86400 - time() % 86400) #This is 24 hours -> change to 48 hours?
+
+        if GLOBALCOUNT == 22: ## 3 weeks have elapsed..
+            break
 
 
 
