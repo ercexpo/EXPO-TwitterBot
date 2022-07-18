@@ -19,13 +19,6 @@ import sys
 import numpy as np
 import argparse
 
-def check_treatment(useridname, db_file):
-    conn=sqlite3.connect(db_file)
-    c=conn.cursor()
-    c.execute("SELECT Treatment FROM users WHERE userid = (?)", [useridname])
-    result=c.fetchone()
-
-    return result
 
 def get_previous_time(useridname, db_file):
     conn=sqlite3.connect(db_file)
@@ -83,6 +76,7 @@ if __name__ == "__main__":
 
     # Initialize variable indicating global iteration of the code
     GLOBALCOUNT = 0
+    last_posted_gc = 0
 
 
     while True:
@@ -107,7 +101,8 @@ if __name__ == "__main__":
         data_df = pd.read_pickle(df_pkl_file)
         print(data_df)
 
-        sub_df = data_df[data_df['GLOBALCOUNT'] == GLOBALCOUNT]
+        #sub_df = data_df[data_df['GLOBALCOUNT'] == GLOBALCOUNT]
+        sub_df = data_df[data_df['GLOBALCOUNT'] > last_posted_gc]
         users_list = sub_df['user'].to_list()
 
         done_check = defaultdict(lambda: False)
@@ -125,7 +120,7 @@ if __name__ == "__main__":
             #if user was replied to in the past 24 hours then continue
 
             if GLOBALCOUNT != 1:
-                if hours < 24:
+                if hours < 24: ###### Change to 24
                     continue
 
             if done_check[ids]:
@@ -147,6 +142,7 @@ if __name__ == "__main__":
                 gc.append(GLOBALCOUNT)
                 sname.append(sub_df.iloc[idx]['screen_name'])
                 done_check[ids] = True
+                last_posted_gc = GLOBALCOUNT
             else:
                 continue
         
@@ -166,11 +162,12 @@ if __name__ == "__main__":
             reply_df.to_pickle(rdf_pkl_file) ##
 
 
-        #sleep(28800 - time() % 28800) #8 hours previously
-        sleep(86400 - time() % 86400) #This is 24 hours -> change to 48 hours?
+        sleep(28800 - time() % 28800) #8 hours previously
+        #sleep(86400 - time() % 86400) #This is 24 hours
+        #sleep(3600 - time() % 3600) ###### 1 hour
 
-        if GLOBALCOUNT == 22: ## 3 weeks have elapsed..
+        ### Implement better exit mechanism with if and break ###
+        if GLOBALCOUNT > 100:
             break
-
 
 

@@ -66,6 +66,7 @@ def get_tweets(token_dict, userid, GLOBALCOUNT, db_file, q):
             since_var = None
         else:
             since_var = get_sinceID(user, db_file)
+            since_var = str(int(since_var[0][0]))
 
         tweets = get_tweet_responses(
             token_dict['consumer_key'],
@@ -134,11 +135,12 @@ def run_collection(GLOBALCOUNT, user_file, db_file, token_file):
         user = res[0]['user_id'] #all user ids should be same for one thread collection
         tweet_list_str = df['tweet_id'].to_list()
         int_list = list(map(int, tweet_list_str))
-        set_sinceID(user, max(int_list), db_file)
         global_count_list = [GLOBALCOUNT] * len(tweet_list_str)
         user_id_list = [user]* len(tweet_list_str)
         df['GLOBALCOUNT'] = global_count_list
         df['user'] = user_id_list
+        set_sinceID(user, max(int_list), db_file) ## set since id for future use
+
 
         if os.path.isfile(df_pkl_file): ##
             loaded_df = pd.read_pickle(df_pkl_file) ##

@@ -36,8 +36,10 @@ def post_tweets(token_dict,replies,tweetids,userIDs, user_file, db_file, q):
     bot_id=[]
     dt_strings = []
 
-    done_check = defaultdict(lambda: False)
     #print(replies, tweetids, userIDs)
+
+    done_check = defaultdict(lambda: False)
+
     for reply, id, user in tqdm(zip(replies,tweetids, userIDs)):
         if done_check[id]:
             continue
@@ -47,6 +49,7 @@ def post_tweets(token_dict,replies,tweetids,userIDs, user_file, db_file, q):
         access_token=token_dict['access_token']
         access_token_secret=token_dict['access_token_secret']
 
+        
         auth = tw.OAuthHandler(consumer_key, consumer_secret)
         auth.set_access_token(access_token, access_token_secret)
         api = tw.API(auth, wait_on_rate_limit=True)
@@ -58,6 +61,7 @@ def post_tweets(token_dict,replies,tweetids,userIDs, user_file, db_file, q):
         bot_id.append(response.user.id_str)
         dt_strings.append(datetime.now().strftime("%Y/%m/%d %H:%M:%S"))
         update_last_replied(user, db_file)
+        
 
         done_check[id] = True
         
