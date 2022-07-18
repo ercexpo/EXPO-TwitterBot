@@ -19,24 +19,22 @@ for i in range(len(listofusers)):
 
 DATE = "2022-07-19"
 
-def get_tweet_responses(consumer_key, consumer_secret, access_token, access_token_secret, keyword):
+def get_tweet_responses(consumer_key, consumer_secret, access_token, access_token_secret, user, num_tweets ):
     auth = tw.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     api = tw.API(auth, wait_on_rate_limit=True)
-    tweetsReq = []
+    tweetsReq = tw.Cursor(api.user_timeline,
+            user_id=user, count=100,
+            tweet_mode='extended').items(num_tweets)
+    tweets = []
     try:
-        for page in tw.Cursor(api.get_friend_ids,user_id=keyword,count=200).pages():
-            tweetsReq.extend(page)
-
-
-        tweets = []
-    
-
-
-        tweets.append(dict(
-            Followers = tweetsReq,
-            user_ID=keyword
-        ))
+        for tweet in tweetsReq:
+            tweets.append(dict(
+                    full_text = tweet.full_text,
+                    tweet_id=tweet.id_str,
+                    screen_name=tweet.user.screen_name,
+                    user_ID=user
+                ))
     except Exception as e:
         print(e)
 
@@ -51,12 +49,12 @@ def getFollowers(token_dict, listofusers):
             token_dict['consumer_secret'],
             token_dict['access_token'],
             token_dict['access_token_secret'],
-            user
+            user, num_tweets=100
         )
         if len(user)==0:
             continue
         else:
-            pd.DataFrame(tweets).to_csv('User-Followers/%s.csv' % (user), index=False)
+            pd.DataFrame(tweets).to_csv('UserTweets-100/%s.csv' % (user), index=False)
 
 def getTokens():
     token_arr = []
@@ -64,11 +62,8 @@ def getTokens():
         tokens = f.read().strip().split('\n')
         for token in tokens:
             consumer_key,consumer_secret,access_token,access_token_secret = token.split('|')
-            try:
-                get_tweet_responses(consumer_key, consumer_secret, access_token, access_token_secret, 44201535, 1, DATE)
-                token_arr.append(dict(consumer_key=consumer_key,consumer_secret=consumer_secret,access_token=access_token,access_token_secret=access_token_secret))
-            except Exception as e:
-                continue
+            token_arr.append(dict(consumer_key=consumer_key,consumer_secret=consumer_secret,access_token=access_token,access_token_secret=access_token_secret))
+    
     return (token_arr)
 
 
