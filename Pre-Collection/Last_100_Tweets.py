@@ -25,12 +25,17 @@ def get_tweet_responses(consumer_key, consumer_secret, access_token, access_toke
     api = tw.API(auth, wait_on_rate_limit=True)
     tweetsReq = tw.Cursor(api.user_timeline,
             user_id=user, count=100,
+            exclude_replies=False, include_rts=True,
             tweet_mode='extended').items(num_tweets)
     tweets = []
     try:
         for tweet in tweetsReq:
+            try:
+                full_text=tweet.retweeted_status.full_text
+            except AttributeError:  # Not a Retweet
+                full_text=tweet.full_text
             tweets.append(dict(
-                    full_text = tweet.full_text,
+                    full_text = full_text,
                     tweet_id=tweet.id_str,
                     screen_name=tweet.user.screen_name,
                     user_ID=user
@@ -51,7 +56,7 @@ def getFollowers(token_dict, listofusers):
             token_dict['access_token_secret'],
             user, num_tweets=100
         )
-        if len(user)==0:
+        if len(tweets)==0:
             continue
         else:
             pd.DataFrame(tweets).to_csv('UserTweets-100/%s.csv' % (user), index=False)

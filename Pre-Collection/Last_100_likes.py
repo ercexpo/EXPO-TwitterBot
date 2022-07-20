@@ -52,7 +52,7 @@ def getFollowers(token_dict, listofusers):
             token_dict['access_token_secret'],
             user, num_tweets=100
         )
-        if len(user)==0:
+        if len(tweets)==0:
             continue
         else:
             pd.DataFrame(tweets).to_csv('User-Likes/%s.csv' % (user), index=False)
