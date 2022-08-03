@@ -32,13 +32,16 @@ def get_tweet_responses(consumer_key, consumer_secret, access_token, access_toke
         for tweet in tweetsReq:
             try:
                 full_text=tweet.retweeted_status.full_text
+                retweeted_user = tweet.retweeted_status.id_str
             except AttributeError:  # Not a Retweet
                 full_text=tweet.full_text
+                retweeted_user = ''  # if not a re-tweet, there is no id to assign here
             tweets.append(dict(
-                    full_text = full_text,
-                    tweet_id=tweet.id_str,
-                    screen_name=tweet.user.screen_name,
-                    user_ID=user
+                full_text = full_text,
+                tweet_id=tweet.id_str,
+                screen_name=tweet.user.screen_name,
+                user_ID=user,
+                retweeted_user_ID=retweeted_user
                 ))
     except Exception as e:
         print(e)
