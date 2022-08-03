@@ -39,6 +39,7 @@ def get_tweet_responses(consumer_key, consumer_secret, access_token, access_toke
             tweets.append(dict(
                 full_text = full_text,
                 tweet_id=tweet.id_str,
+                created_at=tweet.created_at,
                 screen_name=tweet.user.screen_name,
                 user_ID=user,
                 original_user_ID=retweeted_user
