@@ -41,7 +41,7 @@ def get_tweet_responses(consumer_key, consumer_secret, access_token, access_toke
                 tweet_id=tweet.id_str,
                 screen_name=tweet.user.screen_name,
                 user_ID=user,
-                retweeted_user_ID=retweeted_user
+                original_user_ID=retweeted_user
                 ))
     except Exception as e:
         print(e)
