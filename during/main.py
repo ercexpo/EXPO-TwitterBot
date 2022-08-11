@@ -123,7 +123,7 @@ if __name__ == "__main__":
                 if hours < 24: ###### Change to 24
                     continue
 
-            if done_check[ids]:
+            if done_check[useridname]:
                continue
 
             #match tweet
@@ -141,7 +141,7 @@ if __name__ == "__main__":
                 timestamp.append(dt_string)
                 gc.append(GLOBALCOUNT)
                 sname.append(sub_df.iloc[idx]['screen_name'])
-                done_check[ids] = True
+                done_check[useridname] = True
                 last_posted_gc = GLOBALCOUNT
             else:
                 continue
@@ -164,7 +164,7 @@ if __name__ == "__main__":
 
         sleep(28800 - time() % 28800) #8 hours previously
         #sleep(86400 - time() % 86400) #This is 24 hours
-        #sleep(3600 - time() % 3600) ###### 1 hour
+        #sleep(3600 - time() % 3600) #### 1 hour
 
         ### Implement better exit mechanism with if and break ###
         if GLOBALCOUNT > 100:

@@ -38,6 +38,8 @@ def get_tweet_responses(consumer_key, consumer_secret, access_token, access_toke
             ))
     except Exception as e:
         print(e)
+        print("Problematic get_tweets keys -> ")
+        print(consumer_key, consumer_secret, access_token, access_token_secret)
 
     return tweets
 
@@ -128,7 +130,7 @@ def run_collection(GLOBALCOUNT, user_file, db_file, token_file):
         df = pd.DataFrame(res)
 
         if GLOBALCOUNT == 1: #for first time collection, ensure that the tweets are no older than 7 days
-            df = df[df['created'].apply(get_days_passed) <= 7]
+            df = df[df['created'].apply(get_days_passed) <= 1]
             if len(df) == 0: #in case we removed all collected tweets!
                 continue
 

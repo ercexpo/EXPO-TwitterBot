@@ -54,16 +54,20 @@ def post_tweets(token_dict,replies,tweetids,userIDs, user_file, db_file, q):
         auth.set_access_token(access_token, access_token_secret)
         api = tw.API(auth, wait_on_rate_limit=True)
 
-        response=api.update_status(status = reply, in_reply_to_status_id = id , auto_populate_reply_metadata=True)
-        responsetweet_id.append(response.id_str)
-        original_tweet_id.append(response.in_reply_to_status_id_str)
-        original_user_id.append(response.in_reply_to_user_id_str)
-        bot_id.append(response.user.id_str)
-        dt_strings.append(datetime.now().strftime("%Y/%m/%d %H:%M:%S"))
-        update_last_replied(user, db_file)
-        
+        try:
+            response=api.update_status(status = reply, in_reply_to_status_id = id , auto_populate_reply_metadata=True)
+            responsetweet_id.append(response.id_str)
+            original_tweet_id.append(response.in_reply_to_status_id_str)
+            original_user_id.append(response.in_reply_to_user_id_str)
+            bot_id.append(response.user.id_str)
+            dt_strings.append(datetime.now().strftime("%Y/%m/%d %H:%M:%S"))
+            update_last_replied(user, db_file)
+            done_check[id] = True
+        except Exception as e:
+            print(e)
+            print("Problematic post_response keys ->")
+            print(consumer_key, consumer_secret, access_token, access_token_secret)
 
-        done_check[id] = True
         
     dict = {'responsetweet_id': responsetweet_id, 'original_tweet_id': original_tweet_id, 'original_user_id': original_user_id, 'bot_id': bot_id, "time": dt_strings} 
     q.put(dict)
