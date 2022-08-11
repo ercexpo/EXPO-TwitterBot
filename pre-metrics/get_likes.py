@@ -9,43 +9,36 @@ from queue import Queue
 import argparse
 import datetime
 
-def get_user_timeline(consumer_key, consumer_secret, access_token, access_token_secret, user, num_tweets ):
+def get_favorites(consumer_key, consumer_secret, access_token, access_token_secret, user, num_tweets ):
     auth = tw.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     api = tw.API(auth, wait_on_rate_limit=True)
-    tweetsReq = tw.Cursor(api.user_timeline,
+    tweetsReq = tw.Cursor(api.get_favorites,
             user_id=user, count=num_tweets,
-            exclude_replies=False, include_rts=True,
             tweet_mode='extended').items(num_tweets)
     tweets = []
     try:
         for tweet in tweetsReq:
-            try:
-                full_text=tweet.retweeted_status.full_text
-                retweeted_user = tweet.retweeted_status.id_str
-            except AttributeError:  # Not a Retweet
-                full_text=tweet.full_text
-                retweeted_user = ''  # if not a re-tweet, there is no id to assign here
             tweets.append(dict(
-                full_text = full_text,
+                full_text = tweet.full_text,
                 tweet_id=tweet.id_str,
                 created_at=tweet.created_at,
                 screen_name=tweet.user.screen_name,
+                liked_user_id=tweet.user.id_str,
                 original_user_id=user,
-                retweeted_user_ID=retweeted_user,
-                collected_at=datetime.datetime.today()
+                collected_at=datetime.datetime.today(),
                 ))
     except Exception as e:
         print(e)
-
 
     return tweets
 
 
 
-def get_tweets(token_dict, users_list, num_tweets, q):
+
+def get_likes(token_dict, users_list, num_tweets, q):
     for user in tqdm(users_list):
-        tweets = get_user_timeline(
+        tweets = get_favorites(
             token_dict['consumer_key'],
             token_dict['consumer_secret'],
             token_dict['access_token'],
@@ -68,7 +61,7 @@ def get_tokens(token_file):
     return token_arr
 
 
-def get_tweets_main(user_file, token_file, num_tweets):
+def get_likes_main(user_file, token_file, num_tweets):
     user_df = pd.read_csv(user_file)
     users_list = user_df['UserIDs'].apply(lambda x: str(x)).to_list()
     tokens = get_tokens(token_file)
@@ -83,14 +76,14 @@ def get_tweets_main(user_file, token_file, num_tweets):
         token_dict = tokens[i]
         start = int(i * KEYWORDS_PER_THREAD)
         thread_users = users_list[start: start + KEYWORDS_PER_THREAD]
-        thread = Thread(target=get_tweets, args=(token_dict, thread_users, num_tweets, res_q ))
+        thread = Thread(target=get_likes, args=(token_dict, thread_users, num_tweets, res_q ))
         thread.start()
         threads.append(thread)
 
     for thread in threads:
         thread.join()
 
-    save_df_path = 'data/' + user_file.split('users/')[1].split('.csv')[0] + '_tweets_df.csv'
+    save_df_path = 'data/' + user_file.split('users/')[1].split('.csv')[0] + '_likes_df.csv'
 
     while not res_q.empty():
         res = res_q.get()
@@ -116,4 +109,4 @@ if __name__ == '__main__':
     token_file = args.token_file
     num_tweets = int(args.num_tweets)
 
-    get_tweets_main(user_file, token_file, num_tweets)
+    get_likes_main(user_file, token_file, num_tweets)
