@@ -52,7 +52,7 @@ def get_tokens(token_file):
     return token_arr
 
 
-def main_func(user_file, token_file):
+def get_followees_main(user_file, token_file):
     user_df = pd.read_csv(user_file)
     users_list = user_df['UserIDs'].apply(lambda x: str(x)).to_list()
     tokens = get_tokens(token_file)
@@ -74,13 +74,11 @@ def main_func(user_file, token_file):
     for thread in threads:
         thread.join()
 
-    save_df_path = 'data/' + user_file.split('users/')[1].split('.csv')[0] + '_followees_df.pkl'
+    save_df_path = 'data/' + user_file.split('users/')[1].split('.csv')[0] + '_followees_df.csv'
 
     while not res_q.empty():
         res = res_q.get()
-        #print(res)
         res_df = pd.DataFrame({'followees': res[0]['followees'], 'original_user_id': [res[0]['original_user_id']] * len(res[0]['followees'])})
-        #res_df = pd.DataFrame(res)
         if os.path.isfile(save_df_path):
             loaded_df = pd.read_csv(save_df_path)
             res_df = pd.concat([loaded_df, res_df], ignore_index=True, sort=False)
@@ -100,4 +98,4 @@ if __name__ == '__main__':
     user_file = args.user_file
     token_file = args.token_file
 
-    main_func(user_file, token_file)
+    get_followees_main(user_file, token_file)
