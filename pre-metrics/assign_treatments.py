@@ -80,7 +80,7 @@ def block_assign(user_data):
     cols = ['prop_media_followees_block', 'prop_media_likes_block', 'prop_media_retweets_block']
     user_data['block'] = user_data[cols].apply(lambda row: '_'.join(row.values.astype(str)), axis=1)
 
-    # TO DO: Randomly assign a number out of (1, 2, 3), separately for each level of 'block'
+    # TO DO: Randomly assign a number out of (0, 1, 2), separately for each level of 'block'
     # something like this
     # user_data['condition'] = user_data.groupby('block').np.random.randint(1, 3, len(user_data))
 
