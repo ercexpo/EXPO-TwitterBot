@@ -30,11 +30,12 @@ def get_tweet_responses(consumer_key, consumer_secret, access_token, access_toke
     try:
         for tweet in tweetsReq:
             tweets.append(dict(
-                    full_text = tweet.full_text,
-                    tweet_id=tweet.id_str,
-                    screen_name=tweet.user.screen_name,
-                    Tweet_user_ID=tweet.user.id_str,
-                    original_user_ID=user
+                full_text = tweet.full_text,
+                tweet_id=tweet.id_str,
+                created_at=tweet.created_at,
+                screen_name=tweet.user.screen_name,
+                Tweet_user_ID=tweet.user.id_str,
+                original_user_ID=user
                 ))
     except Exception as e:
         print(e)
