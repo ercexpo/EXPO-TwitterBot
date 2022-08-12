@@ -2324,7 +2324,6 @@ index,name,media_handle,media_user_id,origin_list
 2341,thedailybeast.com,thedailybeast,16012783,US-Twitter
 2342,thedailybeast.com,beastbiz,627814254,US-Twitter
 2343,cbs.com,CBS,97739866,US-Twitter
-2344,huffingtonpost.com,huffpost,14511951,US-Twitter
 2345,huffingtonpost.com,blackvoices,13557972,US-Twitter
 2346,huffingtonpost.com,huffpostcontrib,131500972,US-Twitter
 2347,huffingtonpost.com,huffpostpol,15458694,US-Twitter
@@ -2424,7 +2423,6 @@ index,name,media_handle,media_user_id,origin_list
 2449,chicagotribune.com,chitribbiz,112468256,US-Twitter
 2450,chicagotribune.com,trib_ed_board,1168540074029572096,US-Twitter
 2451,chicagotribune.com,chicagobreaking,18915579,US-Twitter
-2452,buzzfeednews.com,BuzzFeedNews,1020058453,US-Twitter
 2453,time.com,time,14293310,US-Twitter
 2454,time.com,timemaglive,887032729,US-Twitter
 2455,time.com,timeideas,386742828,US-Twitter
@@ -2486,7 +2484,6 @@ index,name,media_handle,media_user_id,origin_list
 2513,rd.com,readersdigest,15592792,US-Twitter
 2514,detroitnews.com,detroitnews,16543775,US-Twitter
 2515,express.co.uk,Daily_Express,17895820,US-Twitter
-2516,bbc.co.uk,BBC,19701628,US-Twitter
 2517,msnbc.com,msnbc,2836421,US-Twitter
 2518,msnbc.com,velshiruhle,1292902200713392128,US-Twitter
 2519,msnbc.com,kasiedc,2858499696,US-Twitter
@@ -2733,7 +2730,6 @@ index,name,media_handle,media_user_id,origin_list
 2772,app.com,asburyparkpress,17498747,US-Twitter
 2773,thestreet.com,TheStreet,15281391,US-Twitter
 2774,dailysignal.com,dailysignal,2361224263,US-Twitter
-2775,dailysignal.com,dailysignal,2361224263,US-Twitter
 2776,thegazette.com,gazettedotcom,14370739,US-Twitter
 2777,good.is,good,19621110,US-Twitter
 2778,reviewjournal.com,reviewjournal,15358759,US-Twitter
@@ -2816,12 +2812,10 @@ index,name,media_handle,media_user_id,origin_list
 2857,militarytimes.com,MilitaryTimes,27027979,US-Twitter
 2858,news-press.com,thenewspress,14089276,US-Twitter
 2859,grandforksherald.com,gfherald,15427899,US-Twitter
-2860,ap.org,AP,51241574,US-Twitter
 2861,pantagraph.com,pantagraph,18874087,US-Twitter
 2862,politicususa.com,politicususa,14792049,US-Twitter
 2863,daily-chronicle.com,daily_chronicle,17429521,US-Twitter
 2864,lifezette.com,lifezette,3016071993,US-Twitter
-2865,huffingtonpost.ca,HuffPost,14511951,US-Twitter
 2866,courierpress.com,courierpress,8685652,US-Twitter
 2867,irishtimes.com,IrishTimes,15084853,US-Twitter
 2868,dailylocal.com,wcdailylocal,94599930,US-Twitter
@@ -2976,7 +2970,6 @@ index,name,media_handle,media_user_id,origin_list
 3020,euronews.com,euronews,25067168,US-Twitter
 3021,publicopiniononline.com,ponews,21300851,US-Twitter
 3022,wvgazettemail.com,wvgazettemail,8854622,US-Twitter
-3023,people-press.org,pewresearch,22642788,US-Twitter
 3024,redlandsdailyfacts.com,redlandsnews,48791466,US-Twitter
 3025,houstonpress.com,houstonpress,16621190,US-Twitter
 3026,record-eagle.com,recordeagle,26518175,US-Twitter
@@ -3011,7 +3004,6 @@ index,name,media_handle,media_user_id,origin_list
 3055,law.com,lawdotcom,17878842,US-Twitter
 3056,crescent-news.com,crescentnews,17872554,US-Twitter
 3057,commentarymagazine.com,commentary,18653221,US-Twitter
-3058,reuters.tv,reuters,1652541,US-Twitter
 3059,rblandmark.com,rblandmark,293129700,US-Twitter
 3060,shareblue.com,shareblue,1182279424248598528,US-Twitter
 3061,thebulwark.com,bulwarkonline,1049475664804532224,US-Twitter
@@ -3232,7 +3224,6 @@ index,name,media_handle,media_user_id,origin_list
 3283,vcstar.com,vcstar,15292065,US-Twitter
 3284,caller.com,callerdotcom,17095956,US-Twitter
 3285,independentmail.com,independentmail,14872404,US-Twitter
-3286,billoreilly.com,BillOReilly,23970102,US-Twitter
 3287,firstthings.com,firstthingsmag,25314580,US-Twitter
 3288,ledger-enquirer.com,ledgerenquirer,14882842,US-Twitter
 3289,marinecorpstimes.com,marinetimes,185340210,US-Twitter
@@ -3614,14 +3605,12 @@ index,name,media_handle,media_user_id,origin_list
 3674,greensburgdailynews.com,greensburgdaily,2165273946,US-Twitter
 3675,harrodsburgherald.com,hburgherald,478769163,US-Twitter
 3676,hawaiitribune-herald.com,hitribuneherald,297686425,US-Twitter
-3677,heraldandtribune.com,dailyjournalmo,22027252,US-Twitter
 3678,heralddemocrat.com,heralddemocrat,17147393,US-Twitter
 3679,highlandnews.net,highlandnews1,1490865258,US-Twitter
 3680,homenewshere.com,DTCnow,101575583,US-Twitter
 3681,hudsonreporter.com,hudson_reporter,38256654,US-Twitter
 3682,jamestownsun.com,jamestownsun,15428069,US-Twitter
 3683,johnsoncitypress.com,jcpress,29218765,US-Twitter
-3684,journalism.org,pewresearch,22642788,US-Twitter
 3685,journalstandard.com,journalstandard,22954663,US-Twitter
 3686,lajuntatribunedemocrat.com,lajuntatd,603059797,US-Twitter
 3687,libn.com,libn,16030899,US-Twitter
@@ -3930,7 +3919,6 @@ index,name,media_handle,media_user_id,origin_list
 4005,pasoroblesdailynews.com,pasodailynews,908645388,US-Twitter
 4006,pbn.com,provbusnews,21665565,US-Twitter
 4007,pineandlakes.com,pal_echojournal,95978450,US-Twitter
-4008,pinerivertimes.com,durangoherald,16519670,US-Twitter
 4009,portsmouth-dailytimes.com,pdtnews,58851068,US-Twitter
 4010,press-herald.com,mindenph,2290265245,US-Twitter
 4012,putnamsentinel.com,putnamsentinel,264388014,US-Twitter
@@ -3940,7 +3928,6 @@ index,name,media_handle,media_user_id,origin_list
 4016,ravallirepublic.com,ravallirepublic,69658524,US-Twitter
 4017,rbj.net,rbjdaily,18938376,US-Twitter
 4019,recordherald.com,recordherald,16825847,US-Twitter
-4020,redwoodtimes.com,eurekaTS,124593629,US-Twitter
 4021,rep-am.com,rep_am,17369431,US-Twitter
 4022,reporternewspapers.net,reporter_news,75277551,US-Twitter
 4023,republic-online.com,louisburgherald,37956738,US-Twitter
@@ -4022,7 +4009,6 @@ index,name,media_handle,media_user_id,origin_list
 4103,victoriaadvocate.com,vicadvocate,15535842,US-Twitter
 4104,wadenapj.com,wadenapj,15428984,US-Twitter
 4105,washtimesherald.com,washtimesherald,63516513,US-Twitter
-4107,waynepost.com,messengerpost,18234041,US-Twitter
 4108,wcexaminer.com,wcexaminer,1688758134,US-Twitter
 4109,weatherforddemocrat.com,wforddemo,46674564,US-Twitter
 4110,weeklycitizen.com,weeklycitizen,40416949,US-Twitter
@@ -4112,7 +4098,6 @@ index,name,media_handle,media_user_id,origin_list
 4198,beardstownnewspapers.com,cassstargazette,2377355617,US-Twitter
 4199,beavercreeknewscurrent.com,_beavercreeknc,499016441,US-Twitter
 4200,bedfordbulletin.com,bedfordbullnh,627593761,US-Twitter
-4201,beenews.com,beenewspapers,346676115,US-Twitter
 4202,belgrade-news.com,belgnews,128335122,US-Twitter
 4204,bendsource.com,sourceweekly,65438112,US-Twitter
 4205,beniciaheraldonline.com,beniciaherald,342590917,US-Twitter
@@ -4154,7 +4139,6 @@ index,name,media_handle,media_user_id,origin_list
 4242,boynegazette.com,bcgazette,1326658260598992896,US-Twitter
 4243,breckenridgeamerican.com,breckamerican,1965108474,US-Twitter
 4244,breezecourier.com,breezecourier,249243484,US-Twitter
-4245,brightonpittsfordpost.com,messengerpost,18234041,US-Twitter
 4246,brightsidenews.com,brightsidenews1,264164599,US-Twitter
 4247,bristolobserver.com,bristolobserver,712222846211198976,US-Twitter
 4248,british-weekly.com,britishweekly,287327308,US-Twitter
@@ -4366,12 +4350,10 @@ index,name,media_handle,media_user_id,origin_list
 4470,easterncoloradoplainsman.com,limonleader,2873857441,US-Twitter
 4471,easthamptonstar.com,ehstar,17947097,US-Twitter
 4472,eastoncourier.com,eastoncourier,1374948287162236928,US-Twitter
-4474,eastsidereviewnews.com,lillienews,50053152,US-Twitter
 4475,easyreadernews.com,easyreadernews,87767356,US-Twitter
 4476,ebar.com,ebarnews,123351802,US-Twitter
 4477,echopress.com,echopress,15427349,US-Twitter
 4478,ecmpostreview.com,postreview,39521840,US-Twitter
-4479,ecmpublishers.com,suncurrent,65736329,US-Twitter
 4480,ecprogress.com,ecprogress,26436410,US-Twitter
 4481,effinghamherald.net,effinghamherald,111680656,US-Twitter
 4482,egcitizen.com,elkgrovecitizen,222285792,US-Twitter
@@ -4451,7 +4433,6 @@ index,name,media_handle,media_user_id,origin_list
 4567,gallupindependent.com,gallupind,262253921,US-Twitter
 4568,galvanews.com,galvanews,1027042704,US-Twitter
 4569,gasconadecountyrepublican.com,gcrepublican,577123847,US-Twitter
-4570,gateschilipost.com,messengerpost,18234041,US-Twitter
 4572,gazette-tribune.com,gazettetribune,602922910,US-Twitter
 4573,gbtribune.com,gb_tribune,1055639754,US-Twitter
 4574,gcherald.com,gcheraldsports,1299570253,US-Twitter
@@ -4468,8 +4449,6 @@ index,name,media_handle,media_user_id,origin_list
 4586,grandrapidsmn.com,grheraldreview,197134056,US-Twitter
 4587,grantcountypress.com,grantcopress,1339212409,US-Twitter
 4588,grantky.com,grantcountynews,237429915,US-Twitter
-4589,greatfallsconnection.com,marykimm,99430767,US-Twitter
-4590,greecepost.com,messengerpost,18234041,US-Twitter
 4591,greenecountyheraldonline.com,greenecoherald,17966185,US-Twitter
 4592,greenevillesun.com,greenesun,67003469,US-Twitter
 4593,greenfieldreporter.com,greenfielddr,20599886,US-Twitter
@@ -4481,7 +4460,6 @@ index,name,media_handle,media_user_id,origin_list
 4600,grundycountyherald.com,grundycounty,20592545,US-Twitter
 4601,gsabusiness.com,gsabusiness,295424059,US-Twitter
 4602,gtrnews.com,gtrnews,18197612,US-Twitter
-4603,gtweekly.com,goodtimessc,89037284,US-Twitter
 4605,guilfordgazette.com,guilfordgazette,617751091,US-Twitter
 4606,gulfbreezenews.com,gulfbreezenews,222132843,US-Twitter
 4607,gunnisontimes.com,gunnisontimes,27018040,US-Twitter
@@ -4508,7 +4486,6 @@ index,name,media_handle,media_user_id,origin_list
 4628,heightsobserver.org,heightsobserver,245638510,US-Twitter
 4629,helena-arkansas.com,helenadaily,316691756,US-Twitter
 4631,hendersondispatch.com,daily_dispatch,75121860,US-Twitter
-4632,henriettapost.com,messengerpost,18234041,US-Twitter
 4633,herald-progress.com,heraldprogress,20595712,US-Twitter
 4634,herald-zeitung.com,newbraunfelshz,235331818,US-Twitter
 4635,heraldadvocate.com,herald_advocate,353277920,US-Twitter
@@ -4535,7 +4512,6 @@ index,name,media_handle,media_user_id,origin_list
 4656,hometownargus.com,caledoniaargus,39580590,US-Twitter
 4657,hometownfocus.us,hometownfocus,115671438,US-Twitter
 4658,hometownjournal.biz,hometownjournal,42935684,US-Twitter
-4659,hometownjournal.org,hometownjournal,42935684,US-Twitter
 4660,hopewellnews.com,hopewellnews,121197954,US-Twitter
 4661,howeenterprise.com,howeenterprise,2399106745,US-Twitter
 4662,hoylosangeles.com,hoylosangeles,67457780,US-Twitter
@@ -4553,7 +4529,6 @@ index,name,media_handle,media_user_id,origin_list
 4675,inyoregister.com,inyoregister,1472882329,US-Twitter
 4676,irishamericannews.com,irishnewschgo,551454219,US-Twitter
 4677,irishecho.com,irishecho,32478637,US-Twitter
-4678,irondequoitpost.com,messengerpost,18234041,US-Twitter
 4679,irontontribune.com,irontontribune,19349613,US-Twitter
 4680,isanticountynews.com,isanticonews,39589561,US-Twitter
 4681,island-reporter.com,captivasanibel,59150849,US-Twitter
@@ -4573,7 +4548,6 @@ index,name,media_handle,media_user_id,origin_list
 4696,journal-eureka.com,journaleureka,601334117,US-Twitter
 4697,journal-spectator.com,whartonjs,46196849,US-Twitter
 4698,journal-times.com,thejournaltimes,547132107,US-Twitter
-4699,journalherald.com,calhcojournal,188481249,US-Twitter
 4700,journalmpls.com,thejournalmpls,16746088,US-Twitter
 4701,journalrecord.com,journalrecord,20700623,US-Twitter
 4702,journalreview.com,journalreview,21602955,US-Twitter
@@ -4586,7 +4560,6 @@ index,name,media_handle,media_user_id,origin_list
 4709,keizertimes.com,keizertimes,22222604,US-Twitter
 4710,kempercountymessenger.com,kempermessenger,1345376881,US-Twitter
 4711,kenmarend.com,kenmarenews,198496357,US-Twitter
-4712,kentonbee.com,beenewspapers,346676115,US-Twitter
 4713,keotaeagle.com,keotaeagle,84412649,US-Twitter
 4714,ketchikandailynews.com,kdnsports,240872550,US-Twitter
 4715,keypennews.com,keypennews,91421011,US-Twitter
@@ -4609,7 +4582,6 @@ index,name,media_handle,media_user_id,origin_list
 4733,lajollalight.com,lajollalight,60694159,US-Twitter
 4734,lakeconews.com,lakeconews,20944400,US-Twitter
 4735,lakecountrysun.com,lakecountrysun,29002781,US-Twitter
-4736,lakecountysuburbanlife.com,mysuburbanlife,58490366,US-Twitter
 4737,lakegazette.net,lakegazette,448912434,US-Twitter
 4738,lakegenevanews.net,lgonline,20977427,US-Twitter
 4739,lakenewsonline.com,lakenewsonline,69433229,US-Twitter
@@ -4619,7 +4591,6 @@ index,name,media_handle,media_user_id,origin_list
 4744,lakotacountrytimes.com,lakota_timez,320961515,US-Twitter
 4745,lamardemocrat.com,lamardemocrat,3303239733,US-Twitter
 4746,lamesacourier.com,lamesacourier,2696658584,US-Twitter
-4748,lancasterbee.com,beenewspapers,346676115,US-Twitter
 4749,laprensa-sandiego.org,laprensasd,614854580,US-Twitter
 4750,laprensadecolorado.com,laprensadeco,1375434439,US-Twitter
 4751,laprensanwa.com,laprensalibrear,334982677,US-Twitter
@@ -4652,7 +4623,6 @@ index,name,media_handle,media_user_id,origin_list
 4782,libertylakesplash.com,llsplash,318868552,US-Twitter
 4783,libertytribune.com,libertytribune,37950362,US-Twitter
 4784,likethedew.com,likethedew,22541401,US-Twitter
-4785,lillienews.com,lillienews,50053152,US-Twitter
 4786,lincolncountyjournal.com,lincolncounty,20593255,US-Twitter
 4787,lincolnherald.net,lincolnherald20,629084096,US-Twitter
 4788,lincolnnewsmessenger.com,lincolnnm,56833229,US-Twitter
@@ -4695,7 +4665,6 @@ index,name,media_handle,media_user_id,origin_list
 4826,manchesterjournal.com,manjourn,210853986,US-Twitter
 4827,manhassetpress.com,manhassetpress,2203359480,US-Twitter
 4828,mantecabulletin.com,mantecabulletin,17200433,US-Twitter
-4829,marcoislandflorida.com,thenewspress,14089276,US-Twitter
 4830,margatenews.net,margatenews,97717795,US-Twitter
 4831,mariettatimes.com,mariettatimes,58529506,US-Twitter
 4832,marinij.com,marinij,14239496,US-Twitter
@@ -4754,7 +4723,6 @@ index,name,media_handle,media_user_id,origin_list
 4888,mohavedailynews.com,mdnreporter,3127324504,US-Twitter
 4889,mokenamessenger.com,mokenamessenger,39778257,US-Twitter
 4890,monroebuzz.com,tennesseebuzz,285065118,US-Twitter
-4892,monroejournal.com,monroe360,23785422,US-Twitter
 4893,monroemonitor.com,monroemonitor,61293243,US-Twitter
 4894,montereyherald.com,montereyherald,13134892,US-Twitter
 4895,montgomeryherald.com,montheraldnews,461331832,US-Twitter
@@ -4786,7 +4754,6 @@ index,name,media_handle,media_user_id,origin_list
 4924,mycaldwellcounty.com,caldwellcountyn,381261124,US-Twitter
 4925,mycitypaper.com,mycitypapernyc,754353663083155456,US-Twitter
 4926,mydailytribune.com,gd_trib,2534014316,US-Twitter
-4927,mydallaspost.com,tlnews,19792502,US-Twitter
 4928,myjohnstownbreeze.com,the_jt_breeze,1115008843,US-Twitter
 4929,mymonticellonews.net,myadvancenews,366070674,US-Twitter
 4930,myprogressnews.com,progressnews,56550575,US-Twitter
@@ -4861,9 +4828,7 @@ index,name,media_handle,media_user_id,origin_list
 5000,ojaivalleynews.com,ovn,33340027,US-Twitter
 5001,ojornal.com,ojornal1,488705256,US-Twitter
 5002,omakchronicle.com,omakchronicle,41396811,US-Twitter
-5003,onlinemadison.com,mcjournal,28837048,US-Twitter
 5004,opprairie.com,opprairie,38252658,US-Twitter
-5006,orchardparkbee.com,beenewspapers,346676115,US-Twitter
 5007,oriongazette.com,oriongazette,349627218,US-Twitter
 5008,orlando-times.com,theorlandotimes,605531775,US-Twitter
 5009,oskaloosa.com,oskyherald,376859258,US-Twitter
@@ -4896,7 +4861,6 @@ index,name,media_handle,media_user_id,origin_list
 5037,pcnr.com,thepcnr,141198415,US-Twitter
 5038,pekintimes.com,pekindailytimes,155695119,US-Twitter
 5040,pendletontimespost.com,timespost,41442263,US-Twitter
-5041,penfieldpost.com,messengerpost,18234041,US-Twitter
 5042,peninsulaclarion.com,pclarion,27984903,US-Twitter
 5043,peoplesdefender.com,peoplesdefender,140208481,US-Twitter
 5045,personcountylife.com,roxborocourier,106462350,US-Twitter
@@ -4957,7 +4921,6 @@ index,name,media_handle,media_user_id,origin_list
 5102,queenannenews.com,qamagnews,48864323,US-Twitter
 5103,queenstribune.com,queenstrib,818040343,US-Twitter
 5104,quepasamedia.com,quepasamedia,168790068,US-Twitter
-5105,quepasanoticias.com,quepasamedia,168790068,US-Twitter
 5106,rainscountyleader.com,rainscounty,67396553,US-Twitter
 5107,ramonasentinel.com,ramonasentinel,338669725,US-Twitter
 5108,randomlengthsnews.com,randomlengths,383114423,US-Twitter
@@ -4980,7 +4943,6 @@ index,name,media_handle,media_user_id,origin_list
 5128,reporterandfarmer.com,reporterfarmer,2830335926,US-Twitter
 5129,republictimes.net,republictimes,100800817,US-Twitter
 5131,reverejournal.com,reverejournal,70521534,US-Twitter
-5132,review-news.com,lillienews,50053152,US-Twitter
 5133,reviewonline.com,thereviewonline,58791130,US-Twitter
 5134,reviewtimes.com,fostoria_rt,1969244588,US-Twitter
 5136,rhinotimes.com,rhinotimesgso,24937222,US-Twitter
@@ -4992,7 +4954,6 @@ index,name,media_handle,media_user_id,origin_list
 5143,rockawave.com,thewavenews,1379000759510044672,US-Twitter
 5144,rockdalecitizen.com,rockdalecitizen,231883981,US-Twitter
 5145,rocklandtimes.com,rockland_news,386163434,US-Twitter
-5146,rockwallheraldbanner.com,heraldbanner,47201290,US-Twitter
 5147,rosevilletoday.com,rrtoday,28262222,US-Twitter
 5148,roslyn-news.com,roslynnews,2221841437,US-Twitter
 5149,rrdailyherald.com,rrdailyherald,24293140,US-Twitter
@@ -5009,8 +4970,6 @@ index,name,media_handle,media_user_id,origin_list
 5161,sampan.org,sampannewspaper,372464819,US-Twitter
 5162,sanbenitocountytoday.com,hollisternews,48625268,US-Twitter
 5163,sandiegodowntownnews.com,sddowntownnews,262790137,US-Twitter
-5165,sanfordherald.com,sanfordherald,19671375,US-Twitter
-5166,sanibel-captiva-islander.com,captivasanibel,59150849,US-Twitter
 5167,sanjuanjournal.com,sanjuanjournal,234088546,US-Twitter
 5168,sanmarinotribune.com,sanmarinotribun,1465457538,US-Twitter
 5169,sansabanews.com,sabanews,20503392,US-Twitter
@@ -5086,7 +5045,6 @@ index,name,media_handle,media_user_id,origin_list
 5248,standardbanner.com,standardbanner,1250346146,US-Twitter
 5249,starfl.com,psj_star,242910659,US-Twitter
 5250,starlocalmedia.com,starlocalmedia,823993891,US-Twitter
-5251,starnewsga.com,starnewsonline,15537849,US-Twitter
 5252,starnewsgroup.com,coaststar,924230051666722816,US-Twitter
 5253,starvalleyindependent.com,svi,15928002,US-Twitter
 5254,statejournal.com,wvstatejournal,19773907,US-Twitter
@@ -5119,7 +5077,6 @@ index,name,media_handle,media_user_id,origin_list
 5286,tamatoledonews.com,tamatoledonews,58870935,US-Twitter
 5287,taylorpress.net,taylorpublisher,38606834,US-Twitter
 5289,taylorsvilletimes.com,tville_times,2375954390,US-Twitter
-5290,tbnweekly.com,tbnwebmaster,51370388,US-Twitter
 5291,tbrnews.com,beach_reporter,97725070,US-Twitter
 5293,tdn-net.com,troydailynews,1945474574,US-Twitter
 5294,teaweekly.com,teaweekly,106640569,US-Twitter
@@ -5153,7 +5110,6 @@ index,name,media_handle,media_user_id,origin_list
 5328,thecherokeean.com,chnewsdesk,378349613,US-Twitter
 5329,thechiefleader.com,thechiefleader,313344689,US-Twitter
 5330,thechiefnews.com,thechiefnews,2876884384,US-Twitter
-5331,thechowchillanews.com,mercedsunstar,12334212,US-Twitter
 5332,thechronicleofmtjuliet.com,mj_chronicle,50733937,US-Twitter
 5333,thecincinnatiherald.com,cinciherald,208650694,US-Twitter
 5334,thecitizen-times.com,ctimessville,105544125,US-Twitter
@@ -5174,7 +5130,6 @@ index,name,media_handle,media_user_id,origin_list
 5350,thedailymail.net,catskilldm,1048609021,US-Twitter
 5351,thedailynews.cc,greenvilledn,62819900,US-Twitter
 5353,thedailytimes.com,dailytimes,16300576,US-Twitter
-5354,thedailyworld.com,ghdailyworld,89058215,US-Twitter
 5355,thedalleschronicle.com,tdchronicle,257228064,US-Twitter
 5356,thederrick.com,the_derrick,205370026,US-Twitter
 5357,thedowneypatriot.net,downeypatriot,26849724,US-Twitter
@@ -5197,7 +5152,6 @@ index,name,media_handle,media_user_id,origin_list
 5378,thejournalonline.com,williamstonjour,462954843,US-Twitter
 5379,thelafayettesun.com,lsunnews,271585088,US-Twitter
 5380,thelaketoday.com,the_lake_today,208055275,US-Twitter
-5381,thelancasternews.com,lancasteronline,1011901,US-Twitter
 5382,thelandmark.com,thelandmarknews,140919032,US-Twitter
 5383,theloomisnews.com,theloomisnews,56831153,US-Twitter
 5384,themaconcountynews.com,maconcountynews,1372390200,US-Twitter
@@ -5249,7 +5203,6 @@ index,name,media_handle,media_user_id,origin_list
 5433,thetuskegeenews.com,tuskegeenews,40903888,US-Twitter
 5434,thevalleydispatch.com,valleydispatch,986857034,US-Twitter
 5435,thevalleygazette.com,valleygazette,67360631,US-Twitter
-5436,thevillagenews.com,thefvillagenews,158192819,US-Twitter
 5438,thewaynedalenews.com,waynedalenews,78524348,US-Twitter
 5440,theweirstimes.com,weirstimes,180638409,US-Twitter
 5441,thewellingtonenterprise.com,welenterprise,4901411773,US-Twitter
@@ -5292,7 +5245,6 @@ index,name,media_handle,media_user_id,origin_list
 5480,tricountysentry.com,tricountysentry,180857239,US-Twitter
 5481,trinityjournal.com,trinityjournal,48495120,US-Twitter
 5482,triplicate.com,thetriplicate,44008059,US-Twitter
-5483,tritowntimes.net,londonderrytime,106553921,US-Twitter
 5484,troymessenger.com,troymessenger,19349897,US-Twitter
 5485,troyrecord.com,troyrecord,24905968,US-Twitter
 5487,tsnews.com,timessentinel1,143580934,US-Twitter
@@ -5357,7 +5309,6 @@ index,name,media_handle,media_user_id,origin_list
 5551,westportnow.com,westportnow,17948831,US-Twitter
 5552,westsac.com,wsnewsledger,385641462,US-Twitter
 5553,westseattleherald.com,westseattleher,31941306,US-Twitter
-5554,westsenecabee.com,beenewspapers,346676115,US-Twitter
 5556,westsidetoday.com,westsidelatoday,2303885136,US-Twitter
 5557,westvalleyview.com,westvalleyview,16562166,US-Twitter
 5558,whitefishpilot.com,whitefishpilot,77301563,US-Twitter
