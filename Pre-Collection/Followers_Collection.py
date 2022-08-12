@@ -13,11 +13,11 @@ print(df1.head())
 listofusers=df1.to_list()
 print(len(listofusers))
 
-for i in range(len(listofusers)):
-    listofusers[i]=listofusers[i].split('.')[0]
+# for i in range(len(listofusers)):
+#     listofusers[i]=listofusers[i].split('.')[0]
 
 
-DATE = "2022-07-19"
+DATE = "2022-08-02"
 
 def get_tweet_responses(consumer_key, consumer_secret, access_token, access_token_secret, keyword):
     auth = tw.OAuthHandler(consumer_key, consumer_secret)
@@ -65,7 +65,7 @@ def getTokens():
         for token in tokens:
             consumer_key,consumer_secret,access_token,access_token_secret = token.split('|')
             try:
-                get_tweet_responses(consumer_key, consumer_secret, access_token, access_token_secret, 44201535, 1, DATE)
+                get_tweet_responses(consumer_key, consumer_secret, access_token, access_token_secret, 4148542639, 1, DATE)
                 token_arr.append(dict(consumer_key=consumer_key,consumer_secret=consumer_secret,access_token=access_token,access_token_secret=access_token_secret))
             except Exception as e:
                 continue

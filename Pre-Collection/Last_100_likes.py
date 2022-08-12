@@ -13,11 +13,11 @@ print(df1.head())
 listofusers=df1.to_list()
 print(len(listofusers))
 
-for i in range(len(listofusers)):
-    listofusers[i]=listofusers[i].split('.')[0]
+# for i in range(len(listofusers)):
+#     listofusers[i]=listofusers[i].split('.')[0]
 
 
-DATE = "2022-07-19"
+DATE = "2022-08-02"
 
 def get_tweet_responses(consumer_key, consumer_secret, access_token, access_token_secret, user, num_tweets ):
     auth = tw.OAuthHandler(consumer_key, consumer_secret)

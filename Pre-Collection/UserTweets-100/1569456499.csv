@@ -1,0 +1,268 @@
+full_text,tweet_id,screen_name,user_ID
+"With a new AUC of 0.51, I may have overshot it on the ""make it slightly worse"" part.",1554238435279470593,TenanATC,1569456499
+"@william_m_adams Yeah, so I want to get out there with the validation and model criticism metrics so we're transparent as we can be... but sharing the code itself for the operational model... is just a no-go.",1554190366542274560,TenanATC,1569456499
+"@william_m_adams Well:
+1) we use the better of the two models for a competitive advantage and
+
+2) we might license out the better of the two models to pay the bills.",1554187388313915394,TenanATC,1569456499
+"Today's project:
+
+Make a prediction model that is slightly worse than the one I've already built so I can submit the worse model to a conference requiring data/code to be open source.
+
+Is this how we do #OpenScience?",1554178617105698823,TenanATC,1569456499
+@biomechstu When we think about the chasm between the actual evidence for using Accelerometer/GPS units in football/soccer and how they're marketed or used in practice... I'm not sure the mounting is the biggest issue...,1553844401704763394,TenanATC,1569456499
+https://t.co/g8iVAnrt0b,1553510237105262592,TenanATC,1569456499
+"I know that continuous glucose monitoring is all the rage right now but I'm just saying that my islets of langerhans have been doing it long before it was cool.
+
+#hipsterPhysiology",1553492700971892743,TenanATC,1569456499
+"@scotmorrsn @DrNickCC @OSPpatrick @kcrehabguy @erikMeira @DavidBennion6 @LauraOpstedal @rwilly2003 @MeredithChaput @ewellsandt @mickwhughes @JasonAvedesian @JillMonsonPT @JAT_NATA What do you mean ""establishing what is an acceptable limit""? Like what percentage of points are in the range?",1553362076575436800,TenanATC,1569456499
+"@DrNickCC @scotmorrsn @OSPpatrick @kcrehabguy @erikMeira @DavidBennion6 @LauraOpstedal @rwilly2003 @MeredithChaput @ewellsandt @mickwhughes @JasonAvedesian @JillMonsonPT @JAT_NATA LOA can just as easily be the same measurement within a session or between days 🤷
+
+For rehab setting, you're almost always doing serial testing so it's pretty applicable and understandable.",1553357282234228742,TenanATC,1569456499
+"@DrNickCC @scotmorrsn @OSPpatrick @kcrehabguy @erikMeira @DavidBennion6 @LauraOpstedal @rwilly2003 @MeredithChaput @ewellsandt @mickwhughes @JasonAvedesian @JillMonsonPT @JAT_NATA I'd generally look at a lot of metrics, but I think that the Limits of Agreement (LOA) band from a Bland-Altman analysis are the most intuitive to understand.
+
+For serial testing, it gives the range that contain 95% of data points in normal circumstances.",1553349046391259137,TenanATC,1569456499
+"@scotmorrsn @OSPpatrick @kcrehabguy @erikMeira @DavidBennion6 @LauraOpstedal @rwilly2003 @MeredithChaput @ewellsandt @mickwhughes @JasonAvedesian @JillMonsonPT @JAT_NATA Sure the idea is good, but pretending there is a ""true minimum"" that is factually know and should universally be used is where I take issue.
+
+It should be a ""reasonable idea number"" and not a threshold to cross.",1553133472457412608,TenanATC,1569456499
+"@scotmorrsn @OSPpatrick @kcrehabguy @erikMeira @DavidBennion6 @LauraOpstedal @rwilly2003 @MeredithChaput @ewellsandt @mickwhughes @JasonAvedesian @JillMonsonPT I'm anti-MCID/MID/MCIC/CIC/etc.
+
+Partial rant contained here.
+https://t.co/H0L1ghG5fs
+
+Secondary rant in-press but not yet available at @JAT_NATA",1553128113516777473,TenanATC,1569456499
+@OSPpatrick @kcrehabguy @scotmorrsn @erikMeira @MuyVienDPT @DavidBennion6 @LauraOpstedal @rwilly2003 @MeredithChaput @ewellsandt @mickwhughes @JasonAvedesian @JillMonsonPT https://t.co/r0HxcIZNjH,1553109511887618052,TenanATC,1569456499
+"I just finished the demo version of a killer #Rshiny app showing what's possible with predictive modeling and player tracking data for Collegiate Basketball.
+
+It's killing me that I can't post it publicly.
+
+When do submissions for @SloanSportsConf open again?",1553099604429774849,TenanATC,1569456499
+"@Coach_Alejo Now I've just moved on to Basketball! 
+
+Mostly because its easier to mathematically model than football or soccer.",1553098555623198720,TenanATC,1569456499
+"NEW PAPER!
+
+We dismantle the literature claiming an epidemiological link between altitude and concussions in football.
+
+It's all an artifact from a 2014 paper that inappropriately dichotomized altitude at 600 ft.
+
+If you treat it continuously, there's nothing there. https://t.co/8p7OkaoIx7",1553075190783004673,TenanATC,1569456499
+"Had the opportunity to read a draft of this paper almost a year ago, glad to see it out there.
+
+If you're interested in sport concussions, this is a MUST READ! https://t.co/9B5hKkqyU8",1553072671264755712,TenanATC,1569456499
+"Good/important read for those working in and analyzing sport science data as well! 👇
+
+Could machine learning fuel a reproducibility crisis in science?
+
+‘Data leakage’ threatens the reliability of machine-learning use across disciplines, researchers warn.
+
+https://t.co/5T7fayAeUw",1553008223325757440,TenanATC,1569456499
+@OSPpatrick I'm going to claim they plagiarized my tweet https://t.co/Cy7WdD8E5k,1553008202769473537,TenanATC,1569456499
+"@CoreyScholes But like I said, it's built with a lot of ""tricky"" interaction effects that are 100% theory-based, so I think that helps.",1552811051992973312,TenanATC,1569456499
+"@CoreyScholes No, don't get me wrong. When I started running the calibration assessments, I was surprised to the upside!",1552810587259867136,TenanATC,1569456499
+"@CoreyScholes Realistically, I think it represents a diligent and deliberate model building process from the onset.
+
+That second tweet was my less diligent tossing shit in an machine learning model and see what happens.",1552807127344873472,TenanATC,1569456499
+@RaffaeleM28 I'd deploy that https://t.co/tKmqaPjWTt,1552806703950856192,TenanATC,1569456499
+And the same data with a classic machine learning model... 😮 https://t.co/UoXt9OT68i,1552739378417500160,TenanATC,1569456499
+"No prediction model is perfect, and that... is not terrible.
+😀 https://t.co/lBra54K17b",1552728002697510914,TenanATC,1569456499
+"@GregLehman @DrSethPT @JOSPT @ShepDPT @CPRJoe @danrhon These are all fine points. 
+
+If the goal is to reduce, but not eliminate, practice variability, then getting rid of the outlier nonsense is going to have the greatest impact on the variance of the sample... statistically speaking 😀",1552649469803446274,TenanATC,1569456499
+"Of note, the CEUs which are approved for Athletic Trainers and Strength Coaches are of similar quality (see: inconsistent and low) to what is described for Physical Therapists. https://t.co/qplTiWzilH",1552648605277757441,TenanATC,1569456499
+@elborgo9 @CiK_STORK https://t.co/WsFBjvhABY,1552434960891793408,TenanATC,1569456499
+"@RehabAllStar Now, I'd be surprised if @OSPpatrick didn't have a larger model that incorporated some of that combine data, but in isolation its pretty useless.",1552361273928699910,TenanATC,1569456499
+"This concept is really hard for people to fathom.
+
+The NBA and NFL combines might be good TV and executive networking but they're a whole lot of 'noise' from a data perspective.
+
+I'd 100% guess that G-League performance is more predictive of NBA performance than those metrics. https://t.co/UuQWTUjKte",1552347253762916353,TenanATC,1569456499
+"@GPSDataViz I was just speaking to this image.
+
+I get that your message was just trying to be cute, but it's was a little insulting to imply that it takes 6 hours to do a simple image. I was doing an interactive multi-layered data+raster in javascript. https://t.co/L5sPHotiAL",1552324918565806082,TenanATC,1569456499
+"@GPSDataViz With all due respect, the images in your profile aren't even usable for clients that are colorblind.",1552305235036704769,TenanATC,1569456499
+If someone at #rstudioconf2022 could please figure out how to make ggplot natively interactive... That would be great. https://t.co/i9Di5hGKO9,1552068593520713728,TenanATC,1569456499
+@AKthe_AT Mine is almost always because I'm asking ggplot to do something it's just barely capable of doing.,1552068206784905216,TenanATC,1569456499
+"You're never too ""senior"" a scientist to not spend 6 hours  figuring out how why something won't plot correctly.",1552062112813535232,TenanATC,1569456499
+"The more I see the ""off the shelf"" machine learning solutions in #RStats and #Python, I have to believe that there is substantial information leakage in the ML algorithms and validation.
+Too easy to slap together good seeming algorithms that don't take data structure into account",1551696940206854144,TenanATC,1569456499
+"@GregLehman @TheBikingLawyer @TorontoPolice @CycleToronto @gordperks @Jack_Landau @blogTO @ctv_jon @midweekcycling I'd question if a device primarily designed for speed of a larger, solid vehicle has an instrument validity of a cyclist at that low speed and speed differential.
+
+I demand a measurement error analysis!",1551690360518316032,TenanATC,1569456499
+"Missing data 
+- what is it &amp; why does it matter? 
+
+1/10",1551591821196787717,TenanATC,1569456499
+"@ScientistSports I was a athletic trainer so clinical rotations are built in to the curriculum, but after those 700 hours... Haha, I was good. 
+
+I managed a surf shop in North Carolina in the summers 😎",1551302424610086914,TenanATC,1569456499
+Probably represents an American reliance on people doing unpaid work that they should probably be fairly compensated to perform 🤷 https://t.co/gBdBHFDN1p,1551298176396713992,TenanATC,1569456499
+"@ptreviewer @timothykeyes @avigotsky The less people out there pretending to do data science, the more people will pay me to do real data science... so that's cool.",1550585003762909184,TenanATC,1569456499
+"@OSPpatrick @scotmorrsn If you are don't know who your opponent is, but you know the Patriots have deflated 45% of their balls, what is the probability your ball is deflated?",1550526339639304192,TenanATC,1569456499
+@RehabAllStar @EthanCDouglas You act like that book isn't on my 3 year old's bookshelf...,1550507863642103808,TenanATC,1569456499
+If you are in Collegiate or Professional Athletics do you routinely screen the Athletes for Mental Health conditions like Depression and/or Anxiety?,1550089251563388931,TenanATC,1569456499
+"@binney_z Given the median age, they probably have to get back to their bacta tanks.",1549857775139885060,TenanATC,1569456499
+If you are in Collegiate or Professional Athletics do you routinely screen the Athletes for Mental Health conditions like Depression and/or Anxiety?,1549844466315542530,TenanATC,1569456499
+"Me: You could set up a clean Data Mart that is easy to document and new scientists to use the data
+
+Them: Yeah but I already have spaghetti code that can pull the data
+
+Me: But you can't document it and it's hard to understand
+
+Them: but it works
+
+Me: But... the future
+
+Them: ...",1549498454681976835,TenanATC,1569456499
+@RehabAllStar Analytics at the time said that the highest scorer's average height was 6'6.  They decided to follow the numbers.,1549426548138180609,TenanATC,1569456499
+"@tomdrowley @lukewilson21 @lumley_nick Regression to the mean is saying that following a 'really bad season' it is statistically probable that the next season will be somewhat better based entirely by chance. Same with a 'really good season"", which is probable to be worse.
+
+It's short-term noise.",1549397060771880963,TenanATC,1569456499
+@tomdrowley @lukewilson21 @lumley_nick The only way to know if you're 'better than noise' is to see if the performance mean changes or the performance variance changes over time which requires... you guessed it... time. 🤷,1549396973278695425,TenanATC,1569456499
+"@tomdrowley @lukewilson21 @lumley_nick Regression to the mean is saying that following a 'really bad season' it is statistically probable that the next season will be somewhat better based entirely by chance. Same with a 'really good season"", which is probable to be worse.
+
+It's short-term noise.",1549396630171959297,TenanATC,1569456499
+Nolan Ryan,1549383684985348097,TenanATC,1569456499
+"""workload management"" https://t.co/jIhErqWUvc",1549383216645152768,TenanATC,1569456499
+"@tomdrowley @lukewilson21 I wouldn't say that implementing a system is an accomplishment if you leave and system falls apart or is not maintained.
+
+Relatedly, unless a team is in disarray, I doubt real gains are made with 1 year. A single year of ⬆️ performance is definition of regression to the mean",1549221752890396672,TenanATC,1569456499
+"@NBTiller @Matt_CooperExSc Yep. The bigger issues are what happens ""in practice"". Getting a master's should be about learning skills. Only publish if the quality is there and it is important to you.",1549152139456512003,TenanATC,1569456499
+@MMSchube @NBTiller I bet we could get 5 subjects for each group in the next 6 months for your master's thesis.,1549098989248823299,TenanATC,1569456499
+"@OSPpatrick I believe it. The difference is that in sport science, most data is manpower intensive. That is less often the case at many tech companies. So I tend to think the opportunity cost is higher in sport science.",1548796230515425282,TenanATC,1569456499
+@OSPpatrick Data - &gt;AI Magic - &gt; Championship,1548791800831578112,TenanATC,1569456499
+"Any data is ""a lot of data"" when you don't have a well-defined purpose for having it in the first place.",1548790059096219648,TenanATC,1569456499
+"Sport Science is not ""data rich."" 
+
+Sport Science is ""good question poor.""",1548788265335103491,TenanATC,1569456499
+You know there is some data science team out there thrilled with the performance of their predictive model 🙄 https://t.co/sdFMlKJ0Xs,1548740407944794112,TenanATC,1569456499
+"@SGristDPT Yeah except with military it's scheduled (admittedly, hurry up and wait) and there is a level of structure that doesn't exist in sport.",1548666778217234434,TenanATC,1569456499
+@Fergus_Connolly https://t.co/IhWAPETbFk,1548660806534971393,TenanATC,1569456499
+@DrMattSams I interviewed with the group over 5 years ago. They're very committed to legacy products.,1548481461786841090,TenanATC,1569456499
+"Want to work for the company that handles all the NFL injury data? Could be a cool gig.
+
+Though, I'm not sure they're going to find great candidates under the Data Scientist title for an expert in SAS... 
+
+https://t.co/MmLxalBLTx",1548457177018380290,TenanATC,1569456499
+"@dr_ross1976 No real assumptions, just a crazy reality. My guess is that it's organizational decisions.",1548373980024750082,TenanATC,1569456499
+"The more I connect with professional-level Sport Science and Strength &amp; Conditioning coaches, I'm amazed at the life they've sign up for.
+
+It is seemingly a new team &amp; geographic location every 2-3 years. I don't understand how you establish a record of success or have a family.",1548363549503696897,TenanATC,1569456499
+"And...
+
+""Forest Rangers have a really hard time designing trash cans because of the overlap in abilities between the smartest bears and the dumbest humans""
+
+I almost died. Thanks @statnews.",1548320496923525120,TenanATC,1569456499
+"Two great quotes I heard recently:
+
+(regarding giving a survey to athletes)
+
+""Daily?? It is not supposed to be used daily. Besides, if I would ask daily, players would fuck us off the first day.""",1548320495325495300,TenanATC,1569456499
+"Has anyone in Sport used the Short Recovery and Stress Scale (SRSS) and have opinions on it?
+
+Also, can you send me an image of what it's looked like in practice?",1548110885935230979,TenanATC,1569456499
+"@dsquintana Pavers are insanely more expensive than concrete in the States too, which is unfortunate because they look a lot nicer.",1548049955016757249,TenanATC,1569456499
+"@JulienMouchnino @EatsleepfitJeff @OSPpatrick I've used it with MS SQL Server, Teradata, and Redshift",1547893482093563904,TenanATC,1569456499
+"""Risk Advisor uses multivariate analysis... Each client can select what inputs are considered and how they are weighted so that the model most accurately reflects its expertise and contextual knowledge.""
+
+Mathematically show what you already think? 🤣
+
+https://t.co/14cismrlr0",1547763332416880640,TenanATC,1569456499
+"@DrMattSams Haha, well we aren't perfectly manicured... Yet!",1547706768221818882,TenanATC,1569456499
+"@DrMattSams Before I arrived, it was a data Lake. Not organized and super slow. Now we're in Redshift, but it's because I'm pushing and it would be better with a true engineer. Plus an Engineer would get the APIs hooked up a lot faster than I am.",1547701961843044352,TenanATC,1569456499
+"@OSPpatrick And we pay very nicely and it's 100% remote, but nothing near the total compensation package of a tech company which has stock grants.",1547685105103093764,TenanATC,1569456499
+@OSPpatrick What I wouldn't give to have a real data engineer...,1547684360085598214,TenanATC,1569456499
+"*Ideal
+
+Can't even write English correctly, much less SQL!",1547680881073983490,TenanATC,1569456499
+"My group has been (unsuccessfully) trying to hire a good Data Engineer for a while.
+
+I've become the Data Engineer, which is not idea.
+
+My SQL Process:
+1. Write code in #RStats dbplyr #tidyverse 
+2. Use 'show_query()'
+3. Paste that SQL into DBeaver adding ""Create View""
+4. Done! https://t.co/5y1H1KxcdL",1547680493323202560,TenanATC,1569456499
+@Physio_Ben @DrLeeTaylor @TessFlood @ella_walker @stevemcguire91 @Dr_CMcKay @DrMarkBurnley @StevePowell_Sci @NataliaGalan14 @JollandsMatthew @dr_hwhess @CaptainStich @JulianneDoherty @Josh_Juleff https://t.co/LKuM3HZOBu,1547662457874698244,TenanATC,1569456499
+"@Physio_Ben @DrLeeTaylor @TessFlood @ella_walker @stevemcguire91 @Dr_CMcKay @DrMarkBurnley @StevePowell_Sci @NataliaGalan14 @JollandsMatthew @dr_hwhess @CaptainStich @JulianneDoherty @Josh_Juleff After googling, I can only tell you that what is British slang does not translate in the same way to American English...",1547660194607378432,TenanATC,1569456499
+"OMG. YES.
+
+Also, in my opinion, it would be better if most of these were Decision Tree models and not the typical regression models seen in the Orthopaedic/Sports Medicine literature. https://t.co/lFh7Py52St",1547653815976882178,TenanATC,1569456499
+So in this context is the first author more important or the last author? Which one is the person who did all the work on the tweet and which one got the grant money for the tweet?  I'm so confused. https://t.co/T0LUUtsakP,1547590955556950023,TenanATC,1569456499
+@jamesheathers WTF is this hot garbage.,1547590576630947840,TenanATC,1569456499
+"I’m sold on chickpeas replacing wheat as a crop. It tastes great, is more environmentally sound, requires less fertilizer, and is more nutritious. 
+
+-Not a crop expert just a fan.
+
+https://t.co/mHkekTbSNT",1547030437318610944,TenanATC,1569456499
+"There is just a burning need differentiate:
+
+Scientist with Sport Application
+
+Sport technician (handles GPS, IMUs, etc)
+
+S&amp;C Coach
+
+Sport Coach 
+
+Statistician/Data Scientist
+
+Data Engineer/DBA
+
+Developer
+
+... And not just call them all ""Sport Scientist"". https://t.co/AE73cEQmgi",1547016501374459906,TenanATC,1569456499
+"@spikesonly Haha, well their first problem is spending millions of dollars on what is essentially a fancy looking database, something that's been around since the 70s!",1546976493867335681,TenanATC,1569456499
+"@OSPpatrick @DrSianAllen Right, my quibble is with the uniformity (expecting coding as an expectation in sport science) and the word ""essential""
+
+It's ESSENTIAL a sport scientist know anatomy and Physiology, basics of nutrition, etc.
+
+Coding? Really?",1546960607366242304,TenanATC,1569456499
+👇👇🥇 https://t.co/5vl7HuPXnG,1546959847610105859,TenanATC,1569456499
+"@DrSianAllen I'd argue that people in that ""the market"" doesn't understand the opportunity costs of expecting someone with minimal code training to code 20% of the time.
+
+It'll be a huge time suck and the benefits may be debatable.
+
+https://t.co/ReRGgOfR12",1546959357325320195,TenanATC,1569456499
+"@OSPpatrick @scotmorrsn 100% agreed.
+
+As we've discussed before, it just really depends what a ""sport scientist"" should be doing in the given context.
+
+I'd wager that only 10-20% of sport science jobs should consider coding ""essential""
+
+What are they NOT doing when they spend 4 hrs on a ggplot geom?",1546957240757899269,TenanATC,1569456499
+"@scotmorrsn You don't need code for good data viz these days.
+
+Don't need it the lower level stats analyses.
+
+Don't need code for data management. 
+
+You don't need it for machine learning sport sci folks are likely to do wrong anyhow.
+
+Essential? Sounds like you could use Siri to me...",1546955503229706240,TenanATC,1569456499
+"Maybe surprisingly, I was a ""No"" vote here.
+
+What does coding convey? 
+
+It doesn't mean you understand analytics or data product development.
+
+It doesn't mean you understand data better.
+
+Maybe it makes ""old timers"" think you're smart? https://t.co/WisqeL8CLh",1546947927343513604,TenanATC,1569456499
+"@scotmorrsn You were pretty quick with that list, it's like you have years of pseudoscience experience!",1546634990301200384,TenanATC,1569456499
+@DrSianAllen I've been debating that one... the problem is who will see the presentation... there might still be Kinesiotape users in the audience I don't want to offend!,1546608203571552256,TenanATC,1569456499
+"@lblempke Ah, I can do one better with Pickle Juice! I forgot about this one.
+
+How about solving your blisters with pickle juice?
+
+https://t.co/vSPr4Sv4kl",1546572524816924673,TenanATC,1569456499
+"There is no uniform ""sweet spot"" for training or injury.
+
+Thank you for coming to my TED Talk.",1546556143853621257,TenanATC,1569456499
+"Can people please send me examples of ""Sport Science"" from the last 3 decades that we all ""knew worked"" but was really bogus?
+
+Tour de France riders smoking cigarettes going up the Alps is my classic example but looking for more.",1546544550377824257,TenanATC,1569456499
+"@TStellingwerff @CornellNutri @UofG_HHNS @MaastrichtU @MacKinesiology @Cornell @IthacaCollege Ah, yes. I have a vague relocation of that program. I think IC students can do a nutrition minor through Cornell as well. I spent a year interning with the Cornell wrestling team. Valuable relationship between the schools.",1545928940413489157,TenanATC,1569456499
+"When somebody says R is better than Python for data science or vice versa, most of the time, I think that's just an indication of what they spend most of their time on as a data scientist: statistical analysis vs software engineering.",1545904739937828866,TenanATC,1569456499
