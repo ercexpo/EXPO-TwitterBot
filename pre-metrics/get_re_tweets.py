@@ -101,6 +101,7 @@ def get_tweets_main(user_file, token_file, num_tweets):
         res_df.to_csv(save_df_path, index=False)
 
     print(res_df)
+    return save_df_path
 
 
 

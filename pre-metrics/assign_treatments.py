@@ -2,6 +2,9 @@ import pandas as pd
 from datetime import timedelta
 import argparse
 import numpy as np
+from get_followees import get_followees_main
+from get_likes import get_likes_main
+from get_re_tweets import get_tweets_main
 
 # this is for testing
 # media_file = 'pre-metrics/utils/media_political_twitter.csv'
@@ -80,11 +83,9 @@ def block_assign(user_data):
     cols = ['prop_media_followees_block', 'prop_media_likes_block', 'prop_media_retweets_block']
     user_data['block'] = user_data[cols].apply(lambda row: '_'.join(row.values.astype(str)), axis=1)
 
-    # TO DO: Randomly assign a number out of (0, 1, 2), separately for each level of 'block'
-    # something like this
-    # user_data['condition'] = user_data.groupby('block').np.random.randint(1, 3, len(user_data))
+    user_data['condition'] = user_data.groupby('block', sort=False).ngroup() ### Anshuman
 
-    users_assigned = user_data[['original_user_id', 'block']]
+    users_assigned = user_data[['original_user_id', 'block', 'condition']] ### Anshuman
     return users_assigned
 
 
@@ -92,10 +93,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-u", "--user_file", help="Path to user file", type=str, required=True)
     parser.add_argument("-m", "--media_file", help="Path to media accounts file", type=str, required=True)
-    parser.add_argument("-f", "--followees_file", help="Path to followees csv", type=str, required=True)
-    parser.add_argument("-l", "--likes_file", help="Path to likes csv", type=str, required=True)
-    parser.add_argument("-t", "--tweets_file", help="Path to (re)tweets csv", type=str, required=True)
+    parser.add_argument("-f", "--followees_file", help="Path to followees csv", type=str, required=False) ### Anshuman
+    parser.add_argument("-l", "--likes_file", help="Path to likes csv", type=str, required=False) ### Anshuman
+    parser.add_argument("-r", "--tweets_file", help="Path to (re)tweets csv", type=str, required=False) ### Anshuman
     parser.add_argument("-d", "--days_to_summarize", help="How many days prior to summarize", type=str, required=True)
+    parser.add_argument("-t", "--token_file", help="Path to token file", type=str, required=True) ### Anshuman
+    parser.add_argument("-n", "--num_tweets", help="Number of tweets to search-- should be less than 200", type=int, required=True) ### Anshuman
 
     args = parser.parse_args()
     user_file = args.user_file
@@ -104,7 +107,15 @@ if __name__ == "__main__":
     likes_file = args.likes_file
     tweets_file = args.tweets_file
     days_to_summarize = args.days_to_summarize
+    token_file = args.token_file ### Anshuman
+    num_tweets = int(args.num_tweets) ### Anshuman
 
+    if likes_file is None or tweets_file is None or followees_file is None: ### Anshuman
+        followees_file = get_followees_main(user_file, token_file)
+        likes_file = get_likes_main(user_file, token_file, num_tweets)
+        tweets_file = get_tweets_main(user_file, token_file, num_tweets)
+
+    
     users_summary = summarize_users(users=user_file,
                                     media_accounts=media_file,
                                     followees=followees_file,
@@ -113,17 +124,16 @@ if __name__ == "__main__":
                                     days=days_to_summarize)
     users_conditions = block_assign(users_summary)
 
-    # TO DO: Uncomment this once condition is generated correctly
-    # users_control = users_conditions[users_conditions['condition' == 0]]
-    # users_treatment_1 = users_conditions[users_conditions['condition' == 1]]
-    # users_treatment_2 = users_conditions[users_conditions['condition' == 2]]
+    users_control = users_conditions[users_conditions['condition'] == 0] ### Anshuman
+    users_treatment_1 = users_conditions[users_conditions['condition'] == 1] ### Anshuman
+    users_treatment_2 = users_conditions[users_conditions['condition'] == 2] ### Anshuman
 
     save_df_path = 'data/' + user_file.split('users/')[1].split('.csv')[0] + '_users_assigned.csv'
     users_conditions.to_csv(save_df_path, index=False)
 
-    # TO DO: Uncomment this once condition is generated correctly
-    # users_control.to_csv('data/users_control.csv', index=False)
-    # users_treatment_1.to_csv('data/users_treatment_1.csv', index=False)
-    # users_treatment_2.to_csv('data/users_treatment_2.csv', index=False)
+    users_control.to_csv('data/users_control.csv', index=False)
+    users_treatment_1.to_csv('data/users_treatment_1.csv', index=False)
+    users_treatment_2.to_csv('data/users_treatment_2.csv', index=False)
 
     print(users_conditions)
+    
