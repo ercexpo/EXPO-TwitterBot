@@ -15,12 +15,15 @@ import re
 # matchKeywords(input1)
 
 def check_word_in(phrase, text):
-    return re.search(r"\b{}\b".format(phrase), text, re.IGNORECASE) is not None
+    try:
+        return re.search(r"\b{}\b".format(phrase), text, re.IGNORECASE) is not None
+    except:
+        return None
 
 def match_keywords(text):
 
     # get keywords
-    keyword_df = pd.read_csv("utils/keywords.csv")
+    keyword_df = pd.read_csv("utils/latest_keywords.csv")
     keywords = list(keyword_df['keyword'])
 
     # pre-processing
