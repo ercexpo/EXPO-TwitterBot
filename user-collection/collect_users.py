@@ -95,7 +95,7 @@ def search_tweets(consumer_key, consumer_secret, access_token, access_token_secr
     return tweets
 
 def get_tweets(token_dict, keywords, q, num_tweets, date):
-    for keyword in tqdm(keywords[:10]):
+    for keyword in tqdm(keywords):
         tweets = search_tweets(
             token_dict['consumer_key'],
             token_dict['consumer_secret'],
