@@ -5,6 +5,7 @@ import numpy as np
 from get_followees import get_followees_main
 from get_likes import get_likes_main
 from get_re_tweets import get_tweets_main
+import random
 
 # this is for testing
 # media_file = 'pre-metrics/utils/media_political_twitter.csv'
@@ -71,6 +72,25 @@ def summarize_users(users, media_accounts, followees, likes, tweets, days):
 
     return users_summ
 
+def assign_treatment_per_block(user_df):
+    uniq_blocks = np.unique(user_df['block'].to_list())
+    final_treatments = [-1]*len(user_df)
+    for block_type in uniq_blocks:
+        sub_user_df = user_df[user_df['block'] == block_type]
+        block_len = len(sub_user_df)
+        possible_treatments = [0,1,2]
+        treatments = []
+        np.random.shuffle(possible_treatments)
+        selector = 0
+        for i in range(block_len):
+            treatments.append(possible_treatments[selector])
+            selector += 1
+            if selector == 3:
+                selector = 0
+
+        for idx in sub_user_df.index:
+            final_treatments[idx] = treatments.pop()
+    return final_treatments
 
 def block_assign(user_data):
     # this assigns users to "blocks" for a variable
@@ -83,7 +103,9 @@ def block_assign(user_data):
     cols = ['prop_media_followees_block', 'prop_media_likes_block', 'prop_media_retweets_block']
     user_data['block'] = user_data[cols].apply(lambda row: '_'.join(row.values.astype(str)), axis=1)
 
-    user_data['condition'] = user_data.groupby('block', sort=False).ngroup() ### Anshuman
+    #user_data['condition'] = user_data.groupby('block', sort=False).ngroup() ### Anshuman
+    ret_conds = assign_treatment_per_block(user_data)
+    user_data['condition'] = ret_conds
 
     users_assigned = user_data[['original_user_id', 'block', 'condition']] ### Anshuman
     return users_assigned
