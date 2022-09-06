@@ -18,7 +18,8 @@ def frequency_follower_filter(df):
     #df3 = df2.drop_duplicates(subset=["user_id"], keep="last").loc[:, ["user_id", "followers_count"]]
     df3 = df2.drop_duplicates(subset=["user_id"], keep="last").loc[:,]
     df_count_trim_follower = pd.merge(df_count_trim, df3, on="user_id", how="left")
-    df_count_trim_follower = df_count_trim_follower[(df_count_trim_follower['followers_count'] > 2) & (df_count_trim_follower['followers_count'] < 25000 )]
+    df_count_trim_follower = df_count_trim_follower[(df_count_trim_follower['followers_count'] > 78) & (df_count_trim_follower['followers_count'] < 16538 )]
+    df_count_trim_follower = df_count_trim_follower[(df_count_trim_follower['friends_count'] > 126) & (df_count_trim_follower['friends_count'] < 4589 )]
     return df_count_trim_follower
 
 
