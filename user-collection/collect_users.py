@@ -54,42 +54,45 @@ def search_tweets(consumer_key, consumer_secret, access_token, access_token_secr
             result_type='recent', tweet_mode='extended').items(num_tweets)
 
     tweets = []
-    for tweet in tweetsReq:
-        user_object = tweet.user
 
-        if tweet.in_reply_to_status_id is not None:
-            continue
-        if tweet.user.verified == True:
-            continue
+    try:
+        for tweet in tweetsReq:
+            user_object = tweet.user
 
-        if not check_location(user_object.location):
-            continue
-        if not check_lang(tweet.full_text):
-            continue
+            if tweet.in_reply_to_status_id is not None:
+                continue
+            if tweet.user.verified == True:
+                continue
 
-        user=tweet.user.screen_name
-        user=user.lower()
-        if (user.find('bot') != -1):
-            continue
+            if not check_location(user_object.location):
+                continue
+            if not check_lang(tweet.full_text):
+                continue
+
+            user=tweet.user.screen_name
+            user=user.lower()
+            if (user.find('bot') != -1):
+                continue
         
         
-        tweets.append(dict(
-            full_text = tweet.full_text,
-            tweet_id=tweet.id_str,
-            screen_name=tweet.user.screen_name,
-            user_id=tweet.user.id_str,
-            created_at=user_object.created_at,
-            lang=user_object.lang,
-            location=user_object.location,
-            time_zone=user_object.time_zone,
-            verified=user_object.verified,
-            listed_count=user_object.listed_count,
-            favourites_count=user_object.favourites_count,
-            statuses_count=user_object.statuses_count,
-            friends_count=user_object.friends_count,
-            followers_count=user_object.followers_count
-        ))
-        
+            tweets.append(dict(
+                full_text = tweet.full_text,
+                tweet_id=tweet.id_str,
+                screen_name=tweet.user.screen_name,
+                user_id=tweet.user.id_str,
+                created_at=user_object.created_at,
+                lang=user_object.lang,
+                location=user_object.location,
+                time_zone=user_object.time_zone,
+                verified=user_object.verified,
+                listed_count=user_object.listed_count,
+                favourites_count=user_object.favourites_count,
+                statuses_count=user_object.statuses_count,
+                friends_count=user_object.friends_count,
+                followers_count=user_object.followers_count
+                ))
+    except Exception as e:
+        print(e, consumer_key, consumer_secret, access_token, access_token_secret)
 
 
     return tweets
