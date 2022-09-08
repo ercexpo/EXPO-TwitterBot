@@ -8,15 +8,16 @@ import json
 from queue import Queue
 import argparse
 import datetime
+from collections import defaultdict
 
-def get_user_timeline(consumer_key, consumer_secret, access_token, access_token_secret, user, num_tweets ):
+def get_user_timeline(consumer_key, consumer_secret, access_token, access_token_secret, user, num_tweets, since_id_dict ):
     auth = tw.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     api = tw.API(auth, wait_on_rate_limit=True)
     tweetsReq = tw.Cursor(api.user_timeline,
             user_id=user, count=num_tweets,
             exclude_replies=False, include_rts=True,
-            tweet_mode='extended').items(num_tweets)
+            tweet_mode='extended', since_id=since_id_dict[user]).items(num_tweets)
     tweets = []
     try:
         for tweet in tweetsReq:
@@ -43,14 +44,14 @@ def get_user_timeline(consumer_key, consumer_secret, access_token, access_token_
 
 
 
-def get_tweets(token_dict, users_list, num_tweets, q):
+def get_tweets(token_dict, users_list, num_tweets, since_id_dict, q):
     for user in tqdm(users_list):
         tweets = get_user_timeline(
             token_dict['consumer_key'],
             token_dict['consumer_secret'],
             token_dict['access_token'],
             token_dict['access_token_secret'],
-            user, num_tweets=num_tweets
+            user, num_tweets=num_tweets, since_id_dict=since_id_dict
         )
         if len(tweets)==0:
             continue
@@ -68,10 +69,30 @@ def get_tokens(token_file):
     return token_arr
 
 
+def get_since_id_dict(user_file):
+    save_df_path = 'data/' + user_file.split('users/')[1].split('.csv')[0] + '_tweets_df.csv'
+    user_df = pd.read_csv(user_file)
+    users_list = user_df['UserIDs'].apply(lambda x: str(x)).to_list()
+
+    since_id_dict = defaultdict(lambda: None)
+
+    if os.path.isfile(save_df_path):
+        prev_df = pd.read_csv(save_df_path)
+        for user_id in users_list:
+            all_ids = prev_df[prev_df['original_user_id'] == int(user_id)]['tweet_id'].to_list()
+            if len(all_ids) == 0:
+                continue
+            since_id_dict[user_id] = max(all_ids)
+
+    return since_id_dict
+
+
 def get_tweets_main(user_file, token_file, num_tweets):
     user_df = pd.read_csv(user_file)
     users_list = user_df['UserIDs'].apply(lambda x: str(x)).to_list()
     tokens = get_tokens(token_file)
+
+    since_id_dict = get_since_id_dict(user_file)
 
     res_q = Queue()
 
@@ -83,7 +104,7 @@ def get_tweets_main(user_file, token_file, num_tweets):
         token_dict = tokens[i]
         start = int(i * KEYWORDS_PER_THREAD)
         thread_users = users_list[start: start + KEYWORDS_PER_THREAD]
-        thread = Thread(target=get_tweets, args=(token_dict, thread_users, num_tweets, res_q ))
+        thread = Thread(target=get_tweets, args=(token_dict, thread_users, num_tweets,since_id_dict, res_q ))
         thread.start()
         threads.append(thread)
 
@@ -100,7 +121,12 @@ def get_tweets_main(user_file, token_file, num_tweets):
             res_df = pd.concat([loaded_df, res_df], ignore_index=True, sort=False)
         res_df.to_csv(save_df_path, index=False)
 
-    print(res_df)
+
+    try:
+        print(res_df)
+    except Exception:
+        print("Nothing new to add..")
+
     return save_df_path
 
 
