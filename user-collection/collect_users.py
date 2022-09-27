@@ -164,7 +164,7 @@ def collect_tweets_main(token_file, keyword_file, num_tweets, date):
             if num_threads_collected == NUM_THREADS:
                 break
             else:
-                sleep(600) #10 minutes sleep before checking if any new threads completed again
+                #sleep(600) #10 minutes sleep before checking if any new threads completed again
                 continue
 
         res_df = pd.DataFrame(res)
