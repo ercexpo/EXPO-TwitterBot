@@ -33,7 +33,7 @@ def summarize_users(users, media_accounts, followees, likes, tweets, days):
     user_df = pd.read_csv(users, dtype=str)
     # TO DO: adapt the following line depending on user csv looks like
     user_df.rename(columns={'UserIDs': 'original_user_id'}, inplace=True)
-    user_df = user_df.drop(user_df.columns[1], axis=1)
+    #user_df = user_df.drop(user_df.columns[1], axis=1)
 
     # Summarize followees
     followees_df = followees_df.merge(media_accounts_df, left_on='followees', right_on='media_user_id', how='left')
@@ -131,6 +131,10 @@ if __name__ == "__main__":
     days_to_summarize = args.days_to_summarize
     token_file = args.token_file ### Anshuman
     num_tweets = int(args.num_tweets) ### Anshuman
+
+    users_data = pd.read_csv(user_file) # Potential fix for Michael's issue
+    users_data = users_data['UserIDs'].astype(int)
+    users_data.to_csv(user_file, index=False)
 
     if likes_file is None or tweets_file is None or followees_file is None: ### Anshuman
         followees_file = get_followees_main(user_file, token_file)
