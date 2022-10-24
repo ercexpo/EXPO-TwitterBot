@@ -12,7 +12,7 @@ import geostring as geo
 import spacy
 from spacy_langdetect import LanguageDetector
 from spacy.language import Language
-
+from time import sleep
 
 def check_location(loc):
     loc = geo.resolve(loc)
@@ -149,19 +149,31 @@ def collect_tweets_main(token_file, keyword_file, num_tweets, date):
         thread.start()
         threads.append(thread)
 
-    for thread in threads:
-        thread.join()
+    #for thread in threads:
+    #    thread.join()
 
     save_df_path = './data/users.csv'
 
-    while not res_q.empty():
-        res = res_q.get()
+    num_threads_collected = 0
+
+    #while not res_q.empty():
+    while True:
+        try:
+            res = res_q.get()
+        except:
+            if num_threads_collected == NUM_THREADS:
+                break
+            else:
+                #sleep(600) #10 minutes sleep before checking if any new threads completed again
+                continue
+
         res_df = pd.DataFrame(res)
 
         if os.path.isfile(save_df_path):
             loaded_df = pd.read_csv(save_df_path)
             res_df = pd.concat([loaded_df, res_df], ignore_index=True, sort=False)
         res_df.to_csv(save_df_path, index=False)
+        num_threads_collected += 1
 
     print(res_df)
     return save_df_path
