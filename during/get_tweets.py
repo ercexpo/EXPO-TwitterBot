@@ -100,6 +100,14 @@ def get_days_passed(twitter_date): #Only accepts twitter date format (UTC)
     dtime, now = pd.to_datetime(dtime), pd.to_datetime(now)
     return (now-dtime).days
 
+
+def get_hours_passed(twitter_date): #Only accepts twitter date format (UTC)
+    dtime = twitter_date.to_pydatetime().strftime("%Y/%m/%d %H:%M:%S")
+    now = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+    dtime, now = pd.to_datetime(dtime), pd.to_datetime(now)
+    return ((now-dtime).total_seconds())/3600.0
+
+
 def run_collection(GLOBALCOUNT, user_file, db_file, token_file):
     df_pkl_file = 'data/' + user_file.split('users/')[1].split('.csv')[0] + '_df.pkl'
 
@@ -130,7 +138,7 @@ def run_collection(GLOBALCOUNT, user_file, db_file, token_file):
         df = pd.DataFrame(res)
 
         if GLOBALCOUNT == 1: #for first time collection, ensure that the tweets are no older than 7 days
-            df = df[df['created'].apply(get_days_passed) <= 1]
+            df = df[df['created'].apply(get_hours_passed) <= 8]
             if len(df) == 0: #in case we removed all collected tweets!
                 continue
 
