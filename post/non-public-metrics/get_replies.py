@@ -29,19 +29,19 @@ def get_replies_helper(consumer_key, consumer_secret, access_token, access_token
     auth.set_access_token(access_token, access_token_secret)
     api = tw.API(auth, wait_on_rate_limit=True)
 
-    name = botusername
-    tweet_id=tweetid
+    name ='@{}'.format(botusername) 
+    tweet_id=str(tweetid)
 
     tweetsReq = tw.Cursor(api.search_tweets,
-                q='to: '+name + " -filter:retweets",
-                lang="en", until=date,
+                q='to:{}'.format(name),
+                lang="en", 
                 result_type='recent', tweet_mode='extended').items(num_tweets)
 
     tweets = []
     try:
         for tweet in tweetsReq:
-            if hasattr(tweet, 'in_reply_to_status_id_str') == False:
-                continue
+            # if hasattr(tweet, 'in_reply_to_status_id_str') == False:
+            #     continue
             if (tweet.in_reply_to_status_id_str==tweet_id):
                 tweets.append(dict(
                         full_text = tweet.full_text,
