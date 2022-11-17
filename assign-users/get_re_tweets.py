@@ -22,7 +22,7 @@ def get_user_timeline(consumer_key, consumer_secret, access_token, access_token_
         for tweet in tweetsReq:
             try:
                 full_text=tweet.retweeted_status.full_text
-                retweeted_user = tweet.retweeted_status.id_str
+                retweeted_user = tweet.retweeted_status.user.id_str
             except AttributeError:  # Not a Retweet
                 full_text=tweet.full_text
                 retweeted_user = ''  # if not a re-tweet, there is no id to assign here
