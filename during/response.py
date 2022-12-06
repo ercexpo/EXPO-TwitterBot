@@ -91,11 +91,17 @@ def is_faulty(original, response):
 
 
 def clean_tweet(tweet):
-  tweet = re.sub("@[A-Za-z0-9_]+","", tweet)
-  tweet = re.sub("#[A-Za-z0-9_]+","", tweet)
-  tweet = re.sub(r"http\S+", "", tweet)
-  tweet = re.sub(r"www.\S+", "", tweet)
-  return tweet
+  try:
+    tweet = re.sub("@[A-Za-z0-9_]+","", tweet)
+    tweet = re.sub("#[A-Za-z0-9_]+","", tweet)
+    tweet = re.sub(r"http\S+", "", tweet)
+    tweet = re.sub(r"www.\S+", "", tweet)
+    return tweet
+    
+  except:
+    return tweet
+
+    
 
 
 #DIALO-GPT

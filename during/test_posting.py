@@ -11,6 +11,8 @@ from collections import defaultdict
 from queue import Queue
 import argparse
 
+DATE = "2022-12-02"
+
 def getinfo(response):
     responsetweet_id=response.id_str
     original_tweet_id=response.in_reply_to_status_id_str
@@ -56,6 +58,15 @@ def post_tweets(token_dict,replies,tweetids,userIDs , q):
         api = tw.API(auth, wait_on_rate_limit=True)
 
         try:
+            tweetsReq = tw.Cursor(api.search_tweets,
+                q='Celebrity' + " -filter:retweets",
+                lang="en", until=DATE,
+                result_type='recent', tweet_mode='extended').items(2)
+            
+            for tweet in tweetsReq:
+                print(tweet.full_text)
+                print(tweet.user.screen_name)
+            
             response=api.update_status(status = reply, in_reply_to_status_id = id , auto_populate_reply_metadata=True)
             # responsetweet_id.append(response.id_str)
             # original_tweet_id.append(response.in_reply_to_status_id_str)
@@ -88,9 +99,9 @@ def get_tokens(token_file):
 def run_posting(token_file):
     tokens = get_tokens(token_file)
 
-    replytweets=["Test"]*54
-    tweetIDs=['1595697064888832001']*54
-    userIDs=['']*54
+    replytweets=["Test3"]*1
+    tweetIDs=['1598591563026042882']*1
+    userIDs=['']*1
     print(replytweets)
     print(tweetIDs)
     print(userIDs)
