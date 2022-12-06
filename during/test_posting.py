@@ -6,7 +6,7 @@ from tqdm.auto import tqdm
 import os
 import json
 import sqlite3
-from datetime import datetime
+from datetime import datetime, timedelta
 from collections import defaultdict
 from queue import Queue
 import argparse
@@ -67,7 +67,46 @@ def post_tweets(token_dict,replies,tweetids,userIDs , q):
                 print(tweet.full_text)
                 print(tweet.user.screen_name)
             
+            try:
+                #check=api.set_settings()
+                #botid=check['screen_name']
+                check=api.verify_credentials()
+                print("Checked Credentials")
+                botid=check.id_str
+                print(botid)
+                try:
+                    tweetsReq = tw.Cursor(api.user_timeline,
+                    user_id=botid, count=250,
+                    exclude_replies=True, include_rts=False, ##
+                    tweet_mode='extended').items(250)
+        
+                    *_, last =tweetsReq
+                    print(last.full_text)
+                    created=last.created_at
+                    last_24hour_date_time = datetime.now() - timedelta(hours = 24)
+                    last_24hour_date_time=last_24hour_date_time.strftime("%Y/%m/%d %H:%M:%S")
+                    dtime = created.strftime("%Y/%m/%d %H:%M:%S")
+                    last_24hour_date_time, dtime = pd.to_datetime(last_24hour_date_time), pd.to_datetime(dtime)
+                    print(last_24hour_date_time)
+                    print(dtime)
+                    print((last_24hour_date_time-dtime).total_seconds())
+                    print((dtime-last_24hour_date_time).total_seconds())
+                    if (last_24hour_date_time-dtime).total_seconds() < 0:
+                        continue
+  
+                except Exception as e:
+                    print(e)
+                    print("Problematic post_response keys ->")
+                    print(consumer_key, consumer_secret, access_token, access_token_secret)
+                    pass
+            except Exception as e:
+                print(e)
+                print("Problematic post_response keys ->")
+                print(consumer_key, consumer_secret, access_token, access_token_secret)
+            
             response=api.update_status(status = reply, in_reply_to_status_id = id , auto_populate_reply_metadata=True)
+
+
             # responsetweet_id.append(response.id_str)
             # original_tweet_id.append(response.in_reply_to_status_id_str)
             # original_user_id.append(response.in_reply_to_user_id_str)
@@ -99,7 +138,7 @@ def get_tokens(token_file):
 def run_posting(token_file):
     tokens = get_tokens(token_file)
 
-    replytweets=["Test3"]*1
+    replytweets=["Test4"]*1
     tweetIDs=['1598591563026042882']*1
     userIDs=['']*1
     print(replytweets)

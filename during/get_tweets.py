@@ -9,7 +9,7 @@ import sqlite3
 from collections import defaultdict
 import json
 from queue import Queue
-from datetime import datetime
+from datetime import datetime, timedelta
 
 os.environ['MKL_THREADING_LAYER'] = 'GNU'
 
@@ -138,7 +138,12 @@ def run_collection(GLOBALCOUNT, user_file, db_file, token_file):
         df = pd.DataFrame(res)
 
         if GLOBALCOUNT == 1: #for first time collection, ensure that the tweets are no older than 7 days
-            df = df[df['created'].apply(get_hours_passed) <= 8]
+            df = df[df['created'].apply(get_hours_passed) <= 168]
+            if len(df) == 0: #in case we removed all collected tweets!
+                continue
+        
+        if GLOBALCOUNT != 1: #for 2nd collection time collection and onwards, ensure that the tweets are no older than 24 hours
+            df = df[df['created'].apply(get_hours_passed) <= 24]
             if len(df) == 0: #in case we removed all collected tweets!
                 continue
 
