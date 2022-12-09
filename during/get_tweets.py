@@ -137,15 +137,15 @@ def run_collection(GLOBALCOUNT, user_file, db_file, token_file):
         res = res_q.get()
         df = pd.DataFrame(res)
 
-        if GLOBALCOUNT == 1: #for first time collection, ensure that the tweets are no older than 7 days
-            df = df[df['created'].apply(get_hours_passed) <= 168]
+        if GLOBALCOUNT != 0: #for first time collection, ensure that the tweets are no older than 7 days
+            df = df[df['created'].apply(get_hours_passed) <= 8]
             if len(df) == 0: #in case we removed all collected tweets!
                 continue
         
-        if GLOBALCOUNT != 1: #for 2nd collection time collection and onwards, ensure that the tweets are no older than 24 hours
-            df = df[df['created'].apply(get_hours_passed) <= 24]
-            if len(df) == 0: #in case we removed all collected tweets!
-                continue
+        # if GLOBALCOUNT != 1: #for 2nd collection time collection and onwards, ensure that the tweets are no older than 24 hours
+        #     df = df[df['created'].apply(get_hours_passed) <= 24]
+        #     if len(df) == 0: #in case we removed all collected tweets!
+        #         continue
 
         user = res[0]['user_id'] #all user ids should be same for one thread collection
         tweet_list_str = df['tweet_id'].to_list()
