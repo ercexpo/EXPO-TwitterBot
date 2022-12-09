@@ -54,33 +54,33 @@ def post_tweets(token_dict,replies,tweetids,userIDs, user_file, db_file, q):
         auth.set_access_token(access_token, access_token_secret)
         api = tw.API(auth, wait_on_rate_limit=True)
 
-        try:
-            check=api.verify_credentials()
-            botid=check.id_str
-            try:
-                tweetsReq = tw.Cursor(api.user_timeline,
-                user_id=botid, count=250,
-                exclude_replies=True, include_rts=False, ##
-                tweet_mode='extended').items(250)
+        # try:
+        #     check=api.verify_credentials()
+        #     botid=check.id_str
+        #     try:
+        #         tweetsReq = tw.Cursor(api.user_timeline,
+        #         user_id=botid, count=250,
+        #         exclude_replies=True, include_rts=False, ##
+        #         tweet_mode='extended').items(250)
     
-                *_, last =tweetsReq
-                # print(last.full_text)
-                created=last.created_at
-                last_24hour_date_time = datetime.now() - timedelta(hours = 24)
-                last_24hour_date_time=last_24hour_date_time.strftime("%Y/%m/%d %H:%M:%S")
-                dtime = created.strftime("%Y/%m/%d %H:%M:%S")
-                last_24hour_date_time, dtime = pd.to_datetime(last_24hour_date_time), pd.to_datetime(dtime)
-                # print(last_24hour_date_time)
-                # print(dtime)
-                # print((last_24hour_date_time-dtime).total_seconds())
-                if (last_24hour_date_time-dtime).total_seconds() < 0:
-                    continue
-            except Exception as e:
-                    print(e)
-                    print("Problematic post_response keys ->")
-                    print(consumer_key, consumer_secret, access_token, access_token_secret)
-                    pass
-
+        #         *_, last =tweetsReq
+        #         # print(last.full_text)
+        #         created=last.created_at
+        #         last_24hour_date_time = datetime.now() - timedelta(hours = 24)
+        #         last_24hour_date_time=last_24hour_date_time.strftime("%Y/%m/%d %H:%M:%S")
+        #         dtime = created.strftime("%Y/%m/%d %H:%M:%S")
+        #         last_24hour_date_time, dtime = pd.to_datetime(last_24hour_date_time), pd.to_datetime(dtime)
+        #         # print(last_24hour_date_time)
+        #         # print(dtime)
+        #         # print((last_24hour_date_time-dtime).total_seconds())
+        #         if (last_24hour_date_time-dtime).total_seconds() < 0:
+        #             continue
+        #     except Exception as e:
+        #             print(e)
+        #             print("Problematic post_response keys ->")
+        #             print(consumer_key, consumer_secret, access_token, access_token_secret)
+        #             pass
+        try:
             response=api.update_status(status = reply, in_reply_to_status_id = id , auto_populate_reply_metadata=True)
             responsetweet_id.append(response.id_str)
             original_tweet_id.append(response.in_reply_to_status_id_str)
